@@ -1,0 +1,7 @@
+{
+  "name": "HotSpotsProject",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
