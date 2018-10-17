@@ -76,9 +76,10 @@ export class HomePage {
 
     let htmlInfoWindow = new HtmlInfoWindow();
     let frame = document.createElement('div');
+    frame.setAttribute('class', 'frame');
 
-    frame.innerHTML = [`<h3>${name}</h3>`,
-      `<p>${description}</p>`
+    frame.innerHTML = [`<h3 class="infoHeader">${name}</h3>`,
+      `<p class="description">${description}</p>`
     ].join('');
 
     htmlInfoWindow.setContent(frame, {width: '200px', height: '200px'});
