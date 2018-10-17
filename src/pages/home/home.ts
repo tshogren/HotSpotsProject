@@ -69,7 +69,7 @@ export class HomePage {
 
   addMarker(markerData) {
 
-    const {name, position, description} = markerData;
+    const {name, position, description, icon} = markerData;
     console.log('Description');
     console.log(description);
     console.log(position);
@@ -86,7 +86,7 @@ export class HomePage {
     htmlInfoWindow.setBackgroundColor('white');
 
     let markerOptions = {
-      icon: 'red',
+      icon: icon,
       position: position,
     };
 
