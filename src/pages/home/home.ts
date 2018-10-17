@@ -82,7 +82,7 @@ export class HomePage {
     ].join('');
 
     htmlInfoWindow.setContent(frame, {width: '200px', height: '200px'});
-    htmlInfoWindow.setBackgroundColor('orange');
+    htmlInfoWindow.setBackgroundColor('white');
 
     let markerOptions = {
       icon: 'red',
