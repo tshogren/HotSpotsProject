@@ -27,7 +27,7 @@ export class HomePage {
   // public navCtrl: NavController
   constructor(private platform: Platform,
               private  googleMaps: GoogleMaps) {
-    this.location = new LatLng(44.93939, -93.16875)
+    this.location = new LatLng(44.937907, -93.168582)
 
   }
 
