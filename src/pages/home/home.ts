@@ -108,4 +108,8 @@ export class HomePage {
   //   this.markers.pop().remove();
   // }
 
+  btnClicked(){
+    alert("filter clicked")
+  }
+
 }

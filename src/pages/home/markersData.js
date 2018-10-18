@@ -1,5 +1,5 @@
 let academicIcon = {
-  'url': 'assets/imgs/academicBuilding.png',
+  'url': 'www/assets/imgs/academic-building.png',
   'anchor': [10, 20],
   'size': {
     width: 20,
@@ -38,14 +38,6 @@ export const markersDataArray = [
       lng: -93.16894868324005
     },
     description: 'Home of Math and Science',
-    icon: academicIcon
-  },
-  { name: 'Janet Wallace Fine Arts Center',
-    position: {
-      lat: 44.937578182963996,
-      lng: -93.16967579323779
-    },
-    description: 'Home of Fine Arts',
     icon: academicIcon
   },
   { name: 'Janet Wallace Fine Arts Center',
