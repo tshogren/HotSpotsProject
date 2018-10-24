@@ -71,5 +71,82 @@ export const markersDataArray = [
     },
     description: 'Home of Economics',
     icon: academicIcon
+  },
+  { name: 'Dupre Residence Hall',
+    position: {
+      lat: 44.941034 ,
+      lng: -93.167871
+    },
+    description: 'On campus housing and summer housing for students on campus.',
+    icon: 'red'
+  },
+  { name: 'Doty Residence Hall',
+    position: {
+      lat: 44.940814  ,
+      lng: -93.168601
+    },
+    description: 'On campus housing option.',
+    icon: 'red'
+  },
+  { name: 'Bigelow Residence Hall',
+    position: {
+      lat: 44.940447    ,
+      lng: -93.169131
+    },
+    description: 'On campus housing option.',
+    icon: 'red'
+  },
+  { name: 'Turk Residence Hall',
+    position: {
+      lat: 44.94042    ,
+      lng: -93.168612
+    },
+    description: 'On campus housing option.',
+    icon: 'red'
+  }
+  ,
+  { name: '30 Mac Residence Hall',
+    position: {
+      lat: 44.940757     ,
+      lng: -93.169085
+    },
+    description: 'On campus housing option where residents agree to a healthy living and substance free lifestyle.',
+    icon: 'red'
+  }
+  ,
+  { name: 'Wallace Residence Hall',
+    position: {
+      lat: 44.94111      ,
+      lng: -93.169027
+    },
+    description: 'On campus housing option, reserved for sophomores. .',
+    icon: 'red'
+  }
+  ,
+  {
+    name: 'George Draper Dayton Residence Hall',
+    position: {
+      lat: 44.940916,
+      lng: -93.170423
+    },
+    description: 'On campus housing option, no firstyears. Rooms are suite style.',
+    icon: 'red'
+  }
+    ,
+  { name: 'Cultural House',
+    position: {
+      lat: 44.940367        ,
+      lng: -93.169895
+    },
+    description: 'On campus housing option that serves as a safe space for students of color and allies who are interested in learning from and contributing to a multicultural environment.',
+    icon: 'red'
+  } ,
+  { name: 'Kirk Residence Hall',
+    position: {
+      lat: 44.938531         ,
+      lng: -93.16734
+    },
+    description: 'On campus housing option reserved mostly for juniors and seniors.',
+    icon: 'red'
   }
 ];
