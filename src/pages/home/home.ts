@@ -10,6 +10,8 @@ import {
 } from "@ionic-native/google-maps";
 import { mapStyle } from './mapStyle';
 import { markersDataArray } from './markersData';
+import { PopoverController } from 'ionic-angular/components/popover/popover-controller'
+import {PopoverComponent} from "../../components/popover/popover";
 
 @Component({
   selector: 'page-home',
@@ -26,7 +28,8 @@ export class HomePage {
 
   // public navCtrl: NavController
   constructor(private platform: Platform,
-              private  googleMaps: GoogleMaps) {
+              private  googleMaps: GoogleMaps,
+              public popoverCtrl: PopoverController) {
     this.location = new LatLng(44.937907, -93.168582)
 
   }
@@ -108,8 +111,17 @@ export class HomePage {
   //   this.markers.pop().remove();
   // }
 
-  btnClicked(){
-    alert("filter clicked")
+  presentPopover(myEvent) {
+    const popover = this.popoverCtrl.create(PopoverComponent);
+    popover.present({
+      ev: myEvent
+    })
+   ;
   }
+
+  btnClick() {
+    alert("This is for the user");
+  }
+
 
 }

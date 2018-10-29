@@ -7,9 +7,14 @@
 <ion-content>
   <div #map style='height: 100%'>
     <ion-buttons end>
-      <button ion-button (click)="btnClicked()" icon-only [clear]="true">
+      <button ion-button (click)="presentPopover($event)" icon-only [clear]="true">
         <ion-icon name="funnel" ></ion-icon>
       </button>
     </ion-buttons>
+    <ion-fab bottom right>
+      <button ion-button (click)="btnClick($event)" icon-only [clear]="true">
+        <ion-icon name="information-circle" ></ion-icon>
+      </button>
+    </ion-fab>
   </div>
 </ion-content>
