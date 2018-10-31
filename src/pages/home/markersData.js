@@ -7,6 +7,33 @@ let academicIcon = {
   }
 };
 
+let dormIcon = {
+  'url': 'www/assets/imgs/Bed-image.jpg',
+  'anchor': [10, 20],
+  'size': {
+    width: 20,
+    height: 19
+  }
+};
+
+let libraryIcon = {
+  'url': 'www/assets/imgs/library.png',
+  'anchor': [10, 20],
+  'size': {
+    width: 20,
+    height: 19
+  }
+};
+
+let foodIcon = {
+  'url': 'www/assets/imgs/Food.png',
+  'anchor': [10, 20],
+  'size': {
+    width: 20,
+    height: 19
+  }
+};
+
 export const markersDataArray = [
   { name: 'Old Main',
     position: {
@@ -54,7 +81,7 @@ export const markersDataArray = [
       lng: -93.16818770313091
     },
     description: 'Macalester\'s Library',
-    icon: 'red'
+    icon: libraryIcon
   },
   { name: 'Ruth Stricker Dayton Campus Center',
     position: {
@@ -62,7 +89,7 @@ export const markersDataArray = [
       lng: -93.16763728766716
     },
     description: 'Home of a majority of Macalester\'s dining options, as well as mailing services',
-    icon: 'red'
+    icon: foodIcon
   },
   { name: 'Carnegie Hall',
     position: {
@@ -78,7 +105,7 @@ export const markersDataArray = [
       lng: -93.167871
     },
     description: 'On campus housing and summer housing for students on campus.',
-    icon: 'red'
+    icon: dormIcon
   },
   { name: 'Doty Residence Hall',
     position: {
@@ -86,7 +113,7 @@ export const markersDataArray = [
       lng: -93.168601
     },
     description: 'On campus housing option.',
-    icon: 'red'
+    icon: dormIcon
   },
   { name: 'Bigelow Residence Hall',
     position: {
@@ -94,7 +121,7 @@ export const markersDataArray = [
       lng: -93.169131
     },
     description: 'On campus housing option.',
-    icon: 'red'
+    icon: dormIcon
   },
   { name: 'Turk Residence Hall',
     position: {
@@ -102,7 +129,7 @@ export const markersDataArray = [
       lng: -93.168612
     },
     description: 'On campus housing option.',
-    icon: 'red'
+    icon: dormIcon
   }
   ,
   { name: '30 Mac Residence Hall',
@@ -111,7 +138,7 @@ export const markersDataArray = [
       lng: -93.169085
     },
     description: 'On campus housing option where residents agree to a healthy living and substance free lifestyle.',
-    icon: 'red'
+    icon: dormIcon
   }
   ,
   { name: 'Wallace Residence Hall',
@@ -120,7 +147,7 @@ export const markersDataArray = [
       lng: -93.169027
     },
     description: 'On campus housing option, reserved for sophomores. .',
-    icon: 'red'
+    icon: dormIcon
   }
   ,
   {
@@ -130,7 +157,7 @@ export const markersDataArray = [
       lng: -93.170423
     },
     description: 'On campus housing option, no firstyears. Rooms are suite style.',
-    icon: 'red'
+    icon: dormIcon
   }
     ,
   { name: 'Cultural House',
@@ -147,6 +174,6 @@ export const markersDataArray = [
       lng: -93.16734
     },
     description: 'On campus housing option reserved mostly for juniors and seniors.',
-    icon: 'red'
+    icon: dormIcon
   }
 ];

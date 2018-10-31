@@ -123,5 +123,4 @@ export class HomePage {
     alert("This is for the user");
   }
 
-
 }
