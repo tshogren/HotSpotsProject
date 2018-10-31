@@ -13,6 +13,7 @@ import { markersDataArray } from './markersData';
 import { PopoverController } from 'ionic-angular/components/popover/popover-controller'
 import {PopoverComponent} from "../../components/popover/popover";
 import { MarkerModel } from "./MarkerModel";
+import { FilterHelper } from "./FilterHelper";
 
 @Component({
   selector: 'page-home',
@@ -26,12 +27,14 @@ export class HomePage {
   private location: LatLng;
 
   private markers = [];
+  private filterHelper: FilterHelper;
 
   // public navCtrl: NavController
   constructor(private platform: Platform,
               private  googleMaps: GoogleMaps,
               public popoverCtrl: PopoverController) {
-    this.location = new LatLng(44.937907, -93.168582)
+    this.location = new LatLng(44.937907, -93.168582);
+    this.filterHelper = new FilterHelper();
 
   }
 
@@ -46,7 +49,13 @@ export class HomePage {
         gestures:{
           rotate: false
         },
-        styles: style
+        styles: style,
+        preferences: {
+          zoom: {
+            minZoom: 17
+          }
+        },
+        building: true
       };
 
       this.map = this.googleMaps.create(element, mapOptions);//{styles: style});
@@ -96,6 +105,8 @@ export class HomePage {
     this.map.addMarker(markerOptions)
       .then(marker => {
         console.log('Marker added');
+        // let markerModel = new MarkerModel(marker, '', htmlInfoWindow, frame);
+        // console.log(markerModel);
         this.markers.push(new MarkerModel(marker, '', htmlInfoWindow, frame)); //TODO: change type when we have it ready
 
         // console.log(this.markers.length);
@@ -109,7 +120,20 @@ export class HomePage {
   
 
   presentPopover(myEvent) {
-    const popover = this.popoverCtrl.create(PopoverComponent);
+    let filterHelper = this.filterHelper;
+    const popover = this.popoverCtrl.create(PopoverComponent, { filterHelper });
+
+    popover.onDidDismiss(data => {
+      if (data !== null) {
+        this.filterHelper = data;
+        console.log('Data received!');
+
+        let filterData = this.filterHelper.data; // each type is true if it was checked and false if unchecked
+        //TODO: When all markers have their type set, use filterData to set visibility of each marker
+
+      }
+    });
+
     popover.present({
       ev: myEvent
     })

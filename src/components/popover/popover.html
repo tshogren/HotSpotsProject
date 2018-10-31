@@ -1,23 +1,16 @@
-<ion-content padding>
+<ion-content padding-right>
   <ion-list>
-    <ion-item>
-      <ion-label>Academic</ion-label>
-      <ion-checkbox checked="true"></ion-checkbox>
+    <ion-item *ngFor="let type of types">
+      <ion-label>{{type}}</ion-label>
+      <ion-checkbox [checked]="filterHelper.initialState[type]" (ionChange)="updateData(type)"></ion-checkbox>
     </ion-item>
-
-    <ion-item>
-      <ion-label>Food</ion-label>
-      <ion-checkbox checked="true"></ion-checkbox>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Dorm</ion-label>
-      <ion-checkbox checked="true"></ion-checkbox>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Library</ion-label>
-      <ion-checkbox checked="true"></ion-checkbox>
+    <ion-item text-center>
+      <button ion-button [default]="true" class="popover-button" (click)="close()">
+          Cancel
+      </button>
+      <button ion-button [default]="true" class="popover-button" (click)="dismissAndFilter()">
+          Filter
+      </button>
     </ion-item>
   </ion-list>
 

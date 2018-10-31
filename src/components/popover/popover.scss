@@ -3,4 +3,8 @@ popover {
   $popover-ios-width: 250px;
   $popover-wp-width: 250px;
 
+  .popover-button {
+    //padding: 10px;
+    margin-left: 10px;
+  }
 }
