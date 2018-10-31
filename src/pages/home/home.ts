@@ -12,6 +12,7 @@ import { mapStyle } from './mapStyle';
 import { markersDataArray } from './markersData';
 import { PopoverController } from 'ionic-angular/components/popover/popover-controller'
 import {PopoverComponent} from "../../components/popover/popover";
+import { MarkerModel } from "./MarkerModel";
 
 @Component({
   selector: 'page-home',
@@ -72,15 +73,14 @@ export class HomePage {
 
   addMarker(markerData) {
 
+    //TODO: Destructure type attribute here when we have it ready for each marker data object
     const {name, position, description, icon} = markerData;
-    console.log('Description');
-    console.log(description);
-    console.log(position);
+
 
     let htmlInfoWindow = new HtmlInfoWindow();
     let frame = document.createElement('div');
-    frame.setAttribute('class', 'frame');
 
+    frame.setAttribute('class', 'frame');
     frame.innerHTML = [`<h3 class="infoHeader">${name}</h3>`,
       `<p class="description">${description}</p>`
     ].join('');
@@ -93,10 +93,10 @@ export class HomePage {
       position: position,
     };
 
-    let marker = this.map.addMarker(markerOptions)
+    this.map.addMarker(markerOptions)
       .then(marker => {
         console.log('Marker added');
-        this.markers.push(marker);
+        this.markers.push(new MarkerModel(marker, '', htmlInfoWindow, frame)); //TODO: change type when we have it ready
 
         // console.log(this.markers.length);
 
@@ -106,10 +106,7 @@ export class HomePage {
       });
     // console.log(this.markers.length)
   }
-
-  // deleteMarker() {
-  //   this.markers.pop().remove();
-  // }
+  
 
   presentPopover(myEvent) {
     const popover = this.popoverCtrl.create(PopoverComponent);
