@@ -17,13 +17,14 @@ export class FilterHelper {
     this.initialState = data;
   }
 
-  resetInitialState() {
+  resetInitialStateAndData() {
     for (let index = 0; index < this.types.length; index++) {
       let type = this.types[index];
       this.initialState[type] = false;
+      this.data[type] = false;
     }
   }
 }
 
-let filter = new FilterHelper();
+// let filter = new FilterHelper();
 // console.log(filter.data);

@@ -7,12 +7,14 @@ export class MarkerModel {
   tags: Array<string>;
   infoWindow: HtmlInfoWindow;
   frame: HTMLElement;
+  title: string;
 
-  constructor(markerReference: Marker, type: string, infoWindow: HtmlInfoWindow, frame: HTMLElement) {
+  constructor(markerReference: Marker, title: string, type: string, infoWindow: HtmlInfoWindow, frame: HTMLElement) {
     this.markerReference = markerReference;
     this.type = type;
     this.infoWindow = infoWindow;
     this.frame = frame;
+    this.title = title;
   }
 
   showMarker(){

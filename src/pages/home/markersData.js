@@ -1,5 +1,5 @@
 let academicIcon = {
-  'url': 'www/assets/imgs/academic-building.png',
+  'url': 'assets/imgs/academic-building.png',
   'anchor': [10, 20],
   'size': {
     width: 20,
@@ -8,7 +8,7 @@ let academicIcon = {
 };
 
 let dormIcon = {
-  'url': 'www/assets/imgs/Bed-image.jpg',
+  'url': 'assets/imgs/Bed-image.jpg',
   'anchor': [10, 20],
   'size': {
     width: 20,
@@ -17,7 +17,7 @@ let dormIcon = {
 };
 
 let libraryIcon = {
-  'url': 'www/assets/imgs/library.png',
+  'url': 'assets/imgs/library.png',
   'anchor': [10, 20],
   'size': {
     width: 20,
@@ -26,12 +26,19 @@ let libraryIcon = {
 };
 
 let foodIcon = {
-  'url': 'www/assets/imgs/Food.png',
+  'url': 'assets/imgs/Food.png',
   'anchor': [10, 20],
   'size': {
     width: 20,
     height: 19
   }
+};
+
+const types = {
+  ACADEMIC: 'Academic',
+  LIBRARY: 'Library',
+  FOOD: 'Food',
+  DORM: 'Dorm'
 };
 
 export const markersDataArray = [
@@ -41,7 +48,8 @@ export const markersDataArray = [
       lng: -93.16854
     },
     description: 'Home of Humanities',
-    icon: academicIcon
+    icon: academicIcon,
+    type: types.ACADEMIC
   },
   { name: 'Leonard Center',
     position: {
@@ -49,7 +57,8 @@ export const markersDataArray = [
       lng: -93.16766843260166
     },
     description: 'Athletics and Health and Wellness located here. Also has an additional dining option in Scottys',
-    icon: 'red'
+    icon: 'red',
+    type: ''
   },
   { name: 'Neill Hall',
     position: {
@@ -57,7 +66,8 @@ export const markersDataArray = [
       lng: -93.1692529845086
     },
     description: 'Home of most language programs at Macalester',
-    icon: academicIcon
+    icon: academicIcon,
+    type: types.ACADEMIC
   },
   { name: 'Olin-Rice Science Center ',
     position: {
@@ -65,7 +75,8 @@ export const markersDataArray = [
       lng: -93.16894868324005
     },
     description: 'Home of Math and Science',
-    icon: academicIcon
+    icon: academicIcon,
+    type: types.ACADEMIC
   },
   { name: 'Janet Wallace Fine Arts Center',
     position: {
@@ -73,7 +84,8 @@ export const markersDataArray = [
       lng: -93.16967579323779
     },
     description: 'Home of Fine Arts',
-    icon: academicIcon
+    icon: academicIcon,
+    type: types.ACADEMIC
   },
   { name: 'DeWitt Wallace Library',
     position: {
@@ -81,7 +93,8 @@ export const markersDataArray = [
       lng: -93.16818770313091
     },
     description: 'Macalester\'s Library',
-    icon: libraryIcon
+    icon: libraryIcon,
+    type: types.LIBRARY
   },
   { name: 'Ruth Stricker Dayton Campus Center',
     position: {
@@ -89,7 +102,8 @@ export const markersDataArray = [
       lng: -93.16763728766716
     },
     description: 'Home of a majority of Macalester\'s dining options, as well as mailing services',
-    icon: foodIcon
+    icon: foodIcon,
+    type: types.FOOD
   },
   { name: 'Carnegie Hall',
     position: {
@@ -97,7 +111,8 @@ export const markersDataArray = [
       lng: -93.16919008825039
     },
     description: 'Home of Economics',
-    icon: academicIcon
+    icon: academicIcon,
+    type: types.ACADEMIC
   },
   { name: 'Dupre Residence Hall',
     position: {
@@ -105,7 +120,8 @@ export const markersDataArray = [
       lng: -93.167871
     },
     description: 'On campus housing and summer housing for students on campus.',
-    icon: dormIcon
+    icon: dormIcon,
+    type: types.DORM
   },
   { name: 'Doty Residence Hall',
     position: {
@@ -113,7 +129,8 @@ export const markersDataArray = [
       lng: -93.168601
     },
     description: 'On campus housing option.',
-    icon: dormIcon
+    icon: dormIcon,
+    type: types.DORM
   },
   { name: 'Bigelow Residence Hall',
     position: {
@@ -121,7 +138,8 @@ export const markersDataArray = [
       lng: -93.169131
     },
     description: 'On campus housing option.',
-    icon: dormIcon
+    icon: dormIcon,
+    type: types.DORM
   },
   { name: 'Turk Residence Hall',
     position: {
@@ -129,7 +147,8 @@ export const markersDataArray = [
       lng: -93.168612
     },
     description: 'On campus housing option.',
-    icon: dormIcon
+    icon: dormIcon,
+    type: types.DORM
   }
   ,
   { name: '30 Mac Residence Hall',
@@ -138,7 +157,8 @@ export const markersDataArray = [
       lng: -93.169085
     },
     description: 'On campus housing option where residents agree to a healthy living and substance free lifestyle.',
-    icon: dormIcon
+    icon: dormIcon,
+    type: types.DORM
   }
   ,
   { name: 'Wallace Residence Hall',
@@ -147,7 +167,8 @@ export const markersDataArray = [
       lng: -93.169027
     },
     description: 'On campus housing option, reserved for sophomores. .',
-    icon: dormIcon
+    icon: dormIcon,
+    type: types.DORM
   }
   ,
   {
@@ -157,7 +178,8 @@ export const markersDataArray = [
       lng: -93.170423
     },
     description: 'On campus housing option, no firstyears. Rooms are suite style.',
-    icon: dormIcon
+    icon: dormIcon,
+    type: types.DORM
   }
     ,
   { name: 'Cultural House',
@@ -166,7 +188,8 @@ export const markersDataArray = [
       lng: -93.169895
     },
     description: 'On campus housing option that serves as a safe space for students of color and allies who are interested in learning from and contributing to a multicultural environment.',
-    icon: 'red'
+    icon: 'red',
+    type: ''
   } ,
   { name: 'Kirk Residence Hall',
     position: {
@@ -174,6 +197,7 @@ export const markersDataArray = [
       lng: -93.16734
     },
     description: 'On campus housing option reserved mostly for juniors and seniors.',
-    icon: dormIcon
+    icon: dormIcon,
+    type: types.DORM
   }
 ];

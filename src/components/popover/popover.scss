@@ -1,10 +1,15 @@
 popover {
-  $popover-md-width: 250px;
-  $popover-ios-width: 250px;
-  $popover-wp-width: 250px;
+  //$popover-md-width: 250px;
+  //$popover-ios-width: 250px;
+  //$popover-wp-width: 250px;
+  //$popover-md-max-height: 250px!default;
+
 
   .popover-button {
     //padding: 10px;
-    margin-left: 10px;
+    //margin-left: 20px;
+    //z-index: 10000 !important;
   }
+
+
 }

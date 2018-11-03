@@ -1,5 +1,5 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
-import {NavController, Platform} from 'ionic-angular';
+import {NavController, Platform, Events} from 'ionic-angular';
 import {
   GoogleMap,
   GoogleMaps,
@@ -8,6 +8,8 @@ import {
   GoogleMapOptions,
   HtmlInfoWindow,
 } from "@ionic-native/google-maps";
+import * as _ from 'underscore';
+
 import { mapStyle } from './mapStyle';
 import { markersDataArray } from './markersData';
 import { PopoverController } from 'ionic-angular/components/popover/popover-controller'
@@ -32,9 +34,20 @@ export class HomePage {
   // public navCtrl: NavController
   constructor(private platform: Platform,
               private  googleMaps: GoogleMaps,
-              public popoverCtrl: PopoverController) {
+              public popoverCtrl: PopoverController,
+              public events: Events) {
+
     this.location = new LatLng(44.937907, -93.168582);
     this.filterHelper = new FilterHelper();
+
+    events.subscribe('filter:data-passed', filterData => {
+      this.filter(filterData);
+    });
+    events.subscribe('filter:cancelled', () => {
+      this.markers.forEach((markerModel: MarkerModel) => {
+        markerModel.showMarker();
+      })
+    })
 
   }
 
@@ -83,7 +96,7 @@ export class HomePage {
   addMarker(markerData) {
 
     //TODO: Destructure type attribute here when we have it ready for each marker data object
-    const {name, position, description, icon} = markerData;
+    const {name, position, description, icon, type} = markerData;
 
 
     let htmlInfoWindow = new HtmlInfoWindow();
@@ -105,9 +118,7 @@ export class HomePage {
     this.map.addMarker(markerOptions)
       .then(marker => {
         console.log('Marker added');
-        // let markerModel = new MarkerModel(marker, '', htmlInfoWindow, frame);
-        // console.log(markerModel);
-        this.markers.push(new MarkerModel(marker, '', htmlInfoWindow, frame)); //TODO: change type when we have it ready
+        this.markers.push(new MarkerModel(marker, name, type, htmlInfoWindow, frame));
 
         // console.log(this.markers.length);
 
@@ -121,23 +132,61 @@ export class HomePage {
 
   presentPopover(myEvent) {
     let filterHelper = this.filterHelper;
-    const popover = this.popoverCtrl.create(PopoverComponent, { filterHelper });
+
+    // Clicking backdrop to close filter plays an animation that makes the user unable to drag screen for a few seconds
+    const popover = this.popoverCtrl.create(PopoverComponent, { filterHelper }, {enableBackdropDismiss: false});
 
     popover.onDidDismiss(data => {
       if (data !== null) {
         this.filterHelper = data;
         console.log('Data received!');
+        console.log(data);
+        this.filterHelper.resetInitialStateAndData();
 
-        let filterData = this.filterHelper.data; // each type is true if it was checked and false if unchecked
+        // let filterData = this.filterHelper.data; // each type is true if it was checked and false if unchecked
         //TODO: When all markers have their type set, use filterData to set visibility of each marker
+
+        // this.filter(filterData)
 
       }
     });
+
 
     popover.present({
       ev: myEvent
     })
    ;
+  }
+
+  filter(filterData) {
+
+    this.markers.forEach((markerModel: MarkerModel) => {
+
+      console.log('Marker Model:');
+      console.log(markerModel);
+      console.log('Marker type' + markerModel.type);
+      console.log('Checky: ' + markerModel.type + ', ' + filterData[markerModel.type]);
+
+      let markerType = markerModel.type;
+      console.log('Checky 2: ' + markerType + ', ' + filterData[markerType]);
+
+      if(filterData[markerType] !== undefined) { // Only doing this now to account for some markers not having a type
+
+
+        if(filterData[markerType] === true) {
+          markerModel.showMarker();
+          console.log('Made Visible');
+        }
+        else if (filterData[markerType] === false) {
+          markerModel.hideMarker();
+          console.log('Made Invisible');
+        }
+        else {
+          console.log('Something was unaccounted for. Marker: ' + markerModel.title);
+        }
+      }
+    });
+
   }
 
   btnClick() {

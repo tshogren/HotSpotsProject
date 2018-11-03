@@ -1,17 +1,65 @@
-<ion-content padding-right>
-  <ion-list>
+<!--<ion-content padding-right class="popover-open">-->
+  <!--<ion-list padding-right>-->
+    <!--<ion-list-header text-center>-->
+      <!--<ion-title>Filter</ion-title>-->
+    <!--</ion-list-header>-->
+    <!--<ion-scroll scrollY="true">-->
+      <!--<ion-item-divider>-->
+        <!--Type-->
+      <!--</ion-item-divider>-->
+      <!--<ion-item *ngFor="let type of types">-->
+        <!--<ion-label>{{type}}</ion-label>-->
+        <!--<ion-checkbox [checked]="filterHelper.initialState[type]" (ionChange)="updateData(type)"></ion-checkbox>-->
+      <!--</ion-item>-->
+      <!--<ion-item-divider>-->
+        <!--Type-->
+      <!--</ion-item-divider>-->
+      <!--<ion-item *ngFor="let type of types">-->
+        <!--<ion-label>{{type}}</ion-label>-->
+        <!--<ion-checkbox [checked]="filterHelper.initialState[type]" (ionChange)="updateData(type)"></ion-checkbox>-->
+      <!--</ion-item>-->
+    <!--</ion-scroll>-->
+      <!--<ion-item text-center>-->
+        <!--&lt;!&ndash;<ion-buttons></ion-buttons>&ndash;&gt;-->
+        <!--<button ion-button [default]="true" class="popover-button" (click)="close()">-->
+          <!--Close-->
+        <!--</button>-->
+        <!--<button ion-button [default]="true" class="popover-button" (click)="closeAndReset()">-->
+          <!--Cancel-->
+        <!--</button>-->
+      <!--</ion-item>-->
+  <!--</ion-list>-->
+
+<ion-content>
+<ion-navbar text-center>
+  <ion-title>Filter</ion-title>
+</ion-navbar>
+<!--<ion-scroll scrollY="true">-->
+  <ion-list padding-right>
+    <ion-item-divider>
+      Type
+    </ion-item-divider>
     <ion-item *ngFor="let type of types">
       <ion-label>{{type}}</ion-label>
       <ion-checkbox [checked]="filterHelper.initialState[type]" (ionChange)="updateData(type)"></ion-checkbox>
     </ion-item>
-    <ion-item text-center>
-      <button ion-button [default]="true" class="popover-button" (click)="close()">
-          Cancel
-      </button>
-      <button ion-button [default]="true" class="popover-button" (click)="dismissAndFilter()">
-          Filter
-      </button>
-    </ion-item>
+    <!--<ion-item-divider>-->
+      <!--Type-->
+    <!--</ion-item-divider>-->
+    <!--<ion-item *ngFor="let type of types">-->
+      <!--<ion-label>{{type}}</ion-label>-->
+      <!--<ion-checkbox [checked]="filterHelper.initialState[type]" (ionChange)="updateData(type)"></ion-checkbox>-->
+    <!--</ion-item>-->
   </ion-list>
-
+<!--</ion-scroll>-->
+  <ion-item text-center>
+  <!--<ion-buttons></ion-buttons>-->
+  <button ion-button [default]="true" class="popover-button" (click)="close()">
+    Close
+  </button>
+  <button ion-button [default]="true" class="popover-button" (click)="closeAndReset()">
+    Cancel
+  </button>
+  </ion-item>
 </ion-content>
+
