@@ -12,6 +12,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { GoogleMaps} from "@ionic-native/google-maps";
 import {PopoverComponent} from "../components/popover/popover";
+//import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {PopoverComponent} from "../components/popover/popover";
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp)//,
+    //IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [

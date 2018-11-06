@@ -190,7 +190,12 @@ export class HomePage {
   }
 
   btnClick() {
-    alert("This is for the user");
+    let options = {
+      target: this.location,
+      zoom: 17
+    };
+    this.location = new LatLng(44.937907, -93.168582);
+    this.map.moveCamera(options);
   }
 
 }

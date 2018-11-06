@@ -1,5 +1,5 @@
 let academicIcon = {
-  'url': 'assets/imgs/academic-building.png',
+  'url': 'www/assets/imgs/academic-building.png',
   'anchor': [10, 20],
   'size': {
     width: 20,
@@ -8,7 +8,7 @@ let academicIcon = {
 };
 
 let dormIcon = {
-  'url': 'assets/imgs/Bed-image.jpg',
+  'url': 'www/assets/imgs/Bed-image.jpg',
   'anchor': [10, 20],
   'size': {
     width: 20,
@@ -17,7 +17,7 @@ let dormIcon = {
 };
 
 let libraryIcon = {
-  'url': 'assets/imgs/library.png',
+  'url': 'www/assets/imgs/library.png',
   'anchor': [10, 20],
   'size': {
     width: 20,
@@ -26,7 +26,7 @@ let libraryIcon = {
 };
 
 let foodIcon = {
-  'url': 'assets/imgs/Food.png',
+  'url': 'www/assets/imgs/Food.png',
   'anchor': [10, 20],
   'size': {
     width: 20,
@@ -38,7 +38,8 @@ const types = {
   ACADEMIC: 'Academic',
   LIBRARY: 'Library',
   FOOD: 'Food',
-  DORM: 'Dorm'
+  DORM: 'Dorm',
+  ATHLETIC: 'Athletic'
 };
 
 export const markersDataArray = [
@@ -58,7 +59,7 @@ export const markersDataArray = [
     },
     description: 'Athletics and Health and Wellness located here. Also has an additional dining option in Scottys',
     icon: 'red',
-    type: ''
+    type: types.ATHLETIC
   },
   { name: 'Neill Hall',
     position: {
@@ -188,8 +189,8 @@ export const markersDataArray = [
       lng: -93.169895
     },
     description: 'On campus housing option that serves as a safe space for students of color and allies who are interested in learning from and contributing to a multicultural environment.',
-    icon: 'red',
-    type: ''
+    icon: dormIcon,
+    type: types.DORM
   } ,
   { name: 'Kirk Residence Hall',
     position: {

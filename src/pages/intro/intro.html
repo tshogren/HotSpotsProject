@@ -1,0 +1,46 @@
+<!--
+  Generated template for the IntroPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-slides pager="true">
+
+  <ion-slide>
+    <img src="assets/imgs/HotSpots%20Home%20Screen.png"/>
+    <ion-row text-center>
+    Upon opening HotSpots, a map of Macalester's campus will be displayed for the user. The map contains pins with
+      icons that represent what the location is.
+    </ion-row>
+  </ion-slide>
+
+  <ion-slide>
+    <img src="assets/imgs/HotSpots%20Icon%20Click.png" />
+    <ion-row text-center>
+      When a user clicks on an icon, a window appears that contains the name of the location and a short description.
+    </ion-row>
+  </ion-slide>
+
+  <ion-slide>
+    <img src="assets/imgs/HotSpots%20Filter.png" />
+    <ion-row text-center>
+      In the upper right corner, there is a filter that can remove icons from the map. Clicking close will filter the map.
+      Clicking on cancel will reset the map to its original state.
+    </ion-row>
+  </ion-slide>
+
+  <ion-slide>
+    <ion-row>
+      <ion-col>
+        <img src="assets/imgs/HotSpots%20Home%20Screen.png" />
+        <ion-row text-center>
+          In the lower right corner, there is a button that will recenter the map to Macalester's campus.
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button ion-button color="light" (click)="goToHome()">Continue to HotSpots</button>
+      </ion-col>
+    </ion-row>
+  </ion-slide>
