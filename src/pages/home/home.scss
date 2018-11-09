@@ -16,4 +16,44 @@ page-home {
       top: -21px;
       left: -5px;
     }
+
+  .liked {
+    content: url(../../assets/icon/heart-full.svg);
+    background: white;
+  }
+
+
+  .row-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .num-likes {
+    font-size: 125%;
+  }
+
+
+  .row-item {
+    display: inline-block;
+  }
+
+  .not-liked {
+    content: url(../../assets/icon/heart-not-liked.svg);
+    background: red;
+  }
+
+  .like-button {
+    border-radius: 50%;
+    padding: 4px 0px 3px;
+    border: 2px solid red;
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    box-shadow: 2px 2px 1px #cccccc;
+  }
+
+  #like-button {
+    background-color: transparent !important;
+  }
 }

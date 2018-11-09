@@ -1,5 +1,5 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
-import {NavController, Platform, Events} from 'ionic-angular';
+import {NavController, Platform, Events, ToastController } from 'ionic-angular';
 import {
   GoogleMap,
   GoogleMaps,
@@ -11,11 +11,13 @@ import {
 import * as _ from 'underscore';
 
 import { mapStyle } from './mapStyle';
+import { androidMap, iOSMap} from "./map-style";
 import { markersDataArray } from './markersData';
 import { PopoverController } from 'ionic-angular/components/popover/popover-controller'
 import {PopoverComponent} from "../../components/popover/popover";
 import { MarkerModel } from "./MarkerModel";
 import { FilterHelper } from "./FilterHelper";
+import { BoundsChecker } from "../../assets/models/bounds-checker";
 
 @Component({
   selector: 'page-home',
@@ -26,6 +28,7 @@ export class HomePage {
   @ViewChild('map')
   private mapElement: ElementRef;
   private map: GoogleMap;
+  private boundsChecker: BoundsChecker;
   private location: LatLng;
 
   private markers = [];
@@ -35,7 +38,8 @@ export class HomePage {
   constructor(private platform: Platform,
               private  googleMaps: GoogleMaps,
               public popoverCtrl: PopoverController,
-              public events: Events) {
+              public events: Events,
+              public toaster: ToastController) {
 
     this.location = new LatLng(44.937907, -93.168582);
     this.filterHelper = new FilterHelper();
@@ -52,26 +56,13 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
-    console.log('Home ionViewDidLoad loaded');
+    console.log('Home page loaded');
     this.platform.ready().then(() => {
       let element = this.mapElement.nativeElement;
 
+      const mapOptions: GoogleMapOptions = this.platform.is('android') ? androidMap : iOSMap;
 
-      let style = mapStyle;
-      let mapOptions: GoogleMapOptions = {
-        gestures:{
-          rotate: false
-        },
-        styles: style,
-        preferences: {
-          zoom: {
-            minZoom: 17
-          }
-        },
-        building: true
-      };
-
-      this.map = this.googleMaps.create(element, mapOptions);//{styles: style});
+      this.map = GoogleMaps.create(element, mapOptions);//{styles: style});
 
       this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
         let options = {
@@ -79,23 +70,26 @@ export class HomePage {
           zoom: 17
         };
 
+        this.boundsChecker = new BoundsChecker(this.map, this.location, this.toaster);
+
         this.map.moveCamera(options);
         console.log(markersDataArray);
 
+        this.map.on(GoogleMapsEvent.MAP_DRAG_END).subscribe(() => {
+          this.boundsChecker.checkBounds(this.map.getVisibleRegion(), this.map.getCameraPosition());
+        });
+
         for (let i = 0; i < markersDataArray.length; i++) { // don't enumerate, use sequential for loop
-          console.log(markersDataArray[i]);
           this.addMarker(markersDataArray[i]);
-
         }
-
 
       })
     });
+
   }
 
   addMarker(markerData) {
 
-    //TODO: Destructure type attribute here when we have it ready for each marker data object
     const {name, position, description, icon, type} = markerData;
 
 
@@ -104,8 +98,15 @@ export class HomePage {
 
     frame.setAttribute('class', 'frame');
     frame.innerHTML = [`<h3 class="infoHeader">${name}</h3>`,
-      `<p class="description">${description}</p>`
+      `<p class="description">${description}</p>`,
+      `<div class="row-container">`,
+        `<button id="like-button"><span class=" like-button not-liked"></span></button>`,
+        `<span id="num-likes" class="row-item num-likes">12</span>`,
+      `</div>`
     ].join('');
+
+    frame.querySelector("#like-button").addEventListener('click', event => this.handleLike(event));
+
 
     htmlInfoWindow.setContent(frame, {width: '200px', height: '200px'});
     htmlInfoWindow.setBackgroundColor('white');
@@ -120,13 +121,11 @@ export class HomePage {
         console.log('Marker added');
         this.markers.push(new MarkerModel(marker, name, type, htmlInfoWindow, frame));
 
-        // console.log(this.markers.length);
 
         marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
           htmlInfoWindow.open(marker);
         });
       });
-    // console.log(this.markers.length)
   }
   
 
@@ -142,11 +141,6 @@ export class HomePage {
         console.log('Data received!');
         console.log(data);
         this.filterHelper.resetInitialStateAndData();
-
-        // let filterData = this.filterHelper.data; // each type is true if it was checked and false if unchecked
-        //TODO: When all markers have their type set, use filterData to set visibility of each marker
-
-        // this.filter(filterData)
 
       }
     });
@@ -188,6 +182,28 @@ export class HomePage {
     });
 
   }
+
+  handleLike(event) {
+    let srcElement = event.srcElement;
+    let numLikes;
+
+    if(srcElement.classList.contains('not-liked')) {
+      srcElement.classList.remove('not-liked');
+      srcElement.classList.add('liked');
+      console.log(srcElement.parentNode);
+      console.log(srcElement.parentNode.parentNode.querySelector("#num-likes").textContent);
+      numLikes = parseInt(srcElement.parentNode.parentNode.querySelector("#num-likes").textContent) + 1;
+      console.log('Change!')
+    }
+    else if(srcElement.classList.contains('liked')) {
+      srcElement.classList.remove('liked');
+      srcElement.classList.add('not-liked');
+      numLikes = parseInt(srcElement.parentNode.parentNode.querySelector("#num-likes").textContent) - 1;
+      console.log('Change!')
+    }
+    srcElement.parentNode.parentNode.querySelector("#num-likes").textContent = numLikes.toString();
+  }
+
 
   btnClick() {
     let options = {
