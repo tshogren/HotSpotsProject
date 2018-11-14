@@ -1,13 +1,6 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
-import {NavController, Platform, Events, ToastController } from 'ionic-angular';
-import {
-  GoogleMap,
-  GoogleMaps,
-  GoogleMapsEvent,
-  LatLng,
-  GoogleMapOptions,
-  HtmlInfoWindow,
-} from "@ionic-native/google-maps";
+import { Component, ElementRef, ViewChild} from '@angular/core';
+import { NavController, Platform, Events, ToastController } from 'ionic-angular';
+import { GoogleMap, GoogleMaps, GoogleMapsEvent, LatLng, GoogleMapOptions, HtmlInfoWindow } from "@ionic-native/google-maps";
 import * as _ from 'underscore';
 
 import { mapStyle } from './mapStyle';
@@ -18,6 +11,8 @@ import {PopoverComponent} from "../../components/popover/popover";
 import { MarkerModel } from "./MarkerModel";
 import { FilterHelper } from "./FilterHelper";
 import { BoundsChecker } from "../../assets/models/bounds-checker";
+import { LikeManager } from "../../assets/models/like-manager";
+import { AngularFireDatabase } from "@angular/fire/database";
 
 @Component({
   selector: 'page-home',
@@ -39,7 +34,8 @@ export class HomePage {
               private  googleMaps: GoogleMaps,
               public popoverCtrl: PopoverController,
               public events: Events,
-              public toaster: ToastController) {
+              public toaster: ToastController,
+              public afDB: AngularFireDatabase) {
 
     this.location = new LatLng(44.937907, -93.168582);
     this.filterHelper = new FilterHelper();
@@ -55,6 +51,7 @@ export class HomePage {
 
   }
 
+  /** Loads map after page is ready and attaches event listeners. */
   ionViewDidLoad() {
     console.log('Home page loaded');
     this.platform.ready().then(() => {
@@ -62,7 +59,7 @@ export class HomePage {
 
       const mapOptions: GoogleMapOptions = this.platform.is('android') ? androidMap : iOSMap;
 
-      this.map = GoogleMaps.create(element, mapOptions);//{styles: style});
+      this.map = GoogleMaps.create(element, mapOptions);
 
       this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
         let options = {
@@ -70,10 +67,10 @@ export class HomePage {
           zoom: 17
         };
 
-        this.boundsChecker = new BoundsChecker(this.map, this.location, this.toaster);
-
         this.map.moveCamera(options);
         console.log(markersDataArray);
+
+        this.boundsChecker = new BoundsChecker(this.map, this.location, this.toaster);
 
         this.map.on(GoogleMapsEvent.MAP_DRAG_END).subscribe(() => {
           this.boundsChecker.checkBounds(this.map.getVisibleRegion(), this.map.getCameraPosition());
@@ -90,22 +87,40 @@ export class HomePage {
 
   addMarker(markerData) {
 
+    // TODO: Give markers a tags paramater (String array) and destructure it here
     const {name, position, description, icon, type} = markerData;
+
+    //Uncomment following line and run app to easily add/update our database references if/when we add markers (only for likes)
+    // this.afDB.list('/markerLikes').update(name, {likes: 0});
 
 
     let htmlInfoWindow = new HtmlInfoWindow();
     let frame = document.createElement('div');
 
+    // example tags
+    let tags = ["academic", "food", "foo", "bar", "athletic"];
+
     frame.setAttribute('class', 'frame');
-    frame.innerHTML = [`<h3 class="infoHeader">${name}</h3>`,
+    frame.innerHTML = [`<h5 id="title" class="infoHeader">${name}</h5>`,
+      `<div id="tag-container"></div>`,
       `<p class="description">${description}</p>`,
       `<div class="row-container">`,
-        `<button id="like-button"><span class=" like-button not-liked"></span></button>`,
-        `<span id="num-likes" class="row-item num-likes">12</span>`,
+        `<button id="like-button"><span id="heart" class="like-button"></span></button>`,
+        `<span id="num-likes" class="row-item num-likes"></span>`,
       `</div>`
     ].join('');
 
-    frame.querySelector("#like-button").addEventListener('click', event => this.handleLike(event));
+    // adding tags to markers
+    tags.forEach(tag => {
+
+      let tagDisplay = document.createElement('span');
+      tagDisplay.classList.add('tag');
+      tagDisplay.textContent = tag.toUpperCase();
+
+      frame.querySelector('#tag-container').appendChild(tagDisplay);
+    });
+
+    const likeManager = new LikeManager(this.afDB, frame);
 
 
     htmlInfoWindow.setContent(frame, {width: '200px', height: '200px'});
@@ -127,7 +142,7 @@ export class HomePage {
         });
       });
   }
-  
+
 
   presentPopover(myEvent) {
     let filterHelper = this.filterHelper;
@@ -182,28 +197,6 @@ export class HomePage {
     });
 
   }
-
-  handleLike(event) {
-    let srcElement = event.srcElement;
-    let numLikes;
-
-    if(srcElement.classList.contains('not-liked')) {
-      srcElement.classList.remove('not-liked');
-      srcElement.classList.add('liked');
-      console.log(srcElement.parentNode);
-      console.log(srcElement.parentNode.parentNode.querySelector("#num-likes").textContent);
-      numLikes = parseInt(srcElement.parentNode.parentNode.querySelector("#num-likes").textContent) + 1;
-      console.log('Change!')
-    }
-    else if(srcElement.classList.contains('liked')) {
-      srcElement.classList.remove('liked');
-      srcElement.classList.add('not-liked');
-      numLikes = parseInt(srcElement.parentNode.parentNode.querySelector("#num-likes").textContent) - 1;
-      console.log('Change!')
-    }
-    srcElement.parentNode.parentNode.querySelector("#num-likes").textContent = numLikes.toString();
-  }
-
 
   btnClick() {
     let options = {

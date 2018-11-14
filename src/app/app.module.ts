@@ -12,7 +12,19 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { GoogleMaps} from "@ionic-native/google-maps";
 import {PopoverComponent} from "../components/popover/popover";
-//import { IonicStorageModule } from '@ionic/storage';
+
+import { AngularFireModule } from "@angular/fire"
+import { AngularFireDatabaseModule, AngularFireDatabase } from "@angular/fire/database"
+import { AngularFireAuthModule } from "@angular/fire/auth"
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyANyAIWgkJ0sKXsnLSo-hi_NVeixfvAj4I",
+  authDomain: "hotspots-60e48.firebaseapp.com",
+  databaseURL: "https://hotspots-60e48.firebaseio.com",
+  projectId: "hotspots-60e48",
+  storageBucket: "hotspots-60e48.appspot.com",
+  messagingSenderId: "944740966846"
+};
 
 @NgModule({
   declarations: [
@@ -25,8 +37,10 @@ import {PopoverComponent} from "../components/popover/popover";
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)//,
-    //IonicStorageModule.forRoot()
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -41,6 +55,7 @@ import {PopoverComponent} from "../components/popover/popover";
     StatusBar,
     SplashScreen,
     GoogleMaps,
+    AngularFireDatabase,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

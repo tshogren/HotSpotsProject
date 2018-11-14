@@ -1,7 +1,15 @@
 page-home {
+
+  $info-window-width: 250px;
+
+  :root {
+    --info-window-width: 250;
+  }
+
   .infoHeader {
       background-color: #488aff;
       color: #FFFFFF;
+      //font-size: 100%;
       display: block;
       padding: 10px 20px 10px;
   }
@@ -41,6 +49,34 @@ page-home {
   .not-liked {
     content: url(../../assets/icon/heart-not-liked.svg);
     background: red;
+  }
+
+  #tag-container {
+    //display: flex;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    //grid-column-gap: calc((var(--info-window-width) * .2) / 5)px;
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
+    grid-auto-flow: row;
+    padding: 0 5px 0;
+    //flex-direction: row;
+    //flex-wrap: wrap;
+    //justify-content: space-evenly;
+    //align-items: flex-start;
+    //align-content: flex-start;
+  }
+
+  .tag {
+    //width: 25%;
+    font-size: 50%;
+    grid-column: auto;
+    grid-row: auto;
+    //display: inline-block;
+    padding: 2px 0 2px;
+    background-color: lightblue;
+    border-radius: 2px;
   }
 
   .like-button {
