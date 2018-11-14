@@ -47,6 +47,7 @@ const types = {
   LIBRARY: 'Library',
   FOOD: 'Food',
   DORM: 'Dorm',
+  ATHLETIC: 'Athletic',
   LANDMARK: 'Landmark'
 };
 
@@ -67,7 +68,7 @@ export const markersDataArray = [
     },
     description: 'Athletics and Health and Wellness located here. Also has another dining option called Scotty\'s. Students mainly use this spot for exercise. There is also good spot to nap on the second floor',
     icon: 'red',
-    type: ''
+    type: types.ATHLETIC
   },
   { name: 'Neill Hall',
     position: {
@@ -197,8 +198,8 @@ export const markersDataArray = [
       lng: -93.169895
     },
     description: 'On campus housing option that serves as a safe space for students of color and allies who are interested in learning from and contributing to a multicultural environment.',
-    icon: 'red',
-    type: ''
+    icon: dormIcon,
+    type: types.DORM
   } ,
   { name: 'Kirk Residence Hall',
     position: {

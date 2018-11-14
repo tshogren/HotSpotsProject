@@ -25,7 +25,7 @@ export const mapStyle = [
         "color": "#808080"
       },
       {
-        "weight": 0.5
+        "weight": 2
       }
     ]
   },
@@ -34,6 +34,33 @@ export const mapStyle = [
     "stylers": [
       {
         "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.school",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#808080"
+      },
+      {
+        "lightness": 60
+      },
+      {
+        "visibility": "on"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.school",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "color": "#808080"
+      },
+      {
+        "visibility": "on"
       }
     ]
   },
@@ -90,4 +117,4 @@ export const mapStyle = [
       }
     ]
   }
-];
+]

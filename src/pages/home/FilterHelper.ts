@@ -1,6 +1,6 @@
 export class FilterHelper {
 
-  types = ["Academic", "Food", "Dorm", "Library", "Athletic"];
+  types = ["Academic", "Food", "Dorm", "Library", "Athletic", "Landmark"];
   data = {};
   initialState;
 
