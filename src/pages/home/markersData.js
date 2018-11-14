@@ -35,7 +35,7 @@ let foodIcon = {
 };
 let landmarkIcon = {
   'url': 'www/assets/imgs/landmark.png',
-  'anchor': [30, 10],
+  'anchor': [10, 10],
   'size': {
     width: 20,
     height: 30
@@ -47,6 +47,7 @@ const types = {
   LIBRARY: 'Library',
   FOOD: 'Food',
   DORM: 'Dorm',
+  ATHLETIC: 'Athletic',
   LANDMARK: 'Landmark'
 };
 
@@ -56,7 +57,7 @@ export const markersDataArray = [
       lat: 44.93858,
       lng: -93.16854
     },
-    description: 'Home of Humanities',
+    description: 'Most humanities classes are in this building. Some students come here to study.',
     icon: academicIcon,
     type: types.ACADEMIC
   },
@@ -65,16 +66,16 @@ export const markersDataArray = [
       lat: 44.937286,
       lng: -93.16766843260166
     },
-    description: 'Athletics and Health and Wellness located here. Also has another dining option called Scotty\'s. Students mainly use this spot for exercise. There is also good spot to nap on the second floor',
+    description: 'Students call this the \'LC.\' Students come here to work out, socialize, nap, and eat at Scotty\'s, a dining option that serves burritos. Health and Wellness is also located here.',
     icon: 'red',
-    type: ''
+    type: types.ATHLETIC
   },
   { name: 'Neill Hall',
     position: {
       lat: 44.93725802043779,
       lng: -93.1692529845086
     },
-    description: 'Home of most language programs at Macalester.',
+    description: 'Language and humanities classes are taught in this building. Students come here to study.',
     icon: academicIcon,
     type: types.ACADEMIC
   },
@@ -83,7 +84,7 @@ export const markersDataArray = [
       lat: 44.93666646373501,
       lng: -93.16894868324005
     },
-    description: 'Math and Science building.',
+    description: 'Macalester\'s math and science building. Students use this space for studying and there are also a few good spots for napping.',
     icon: academicIcon,
     type: types.ACADEMIC
   },
@@ -92,7 +93,7 @@ export const markersDataArray = [
       lat: 44.937578182963996,
       lng: -93.16967579323779
     },
-    description: 'Macalester\'s fine arts building.',
+    description: 'Student\'s call this building \'JWall.\' Fine arts classes are taught here, and art exhibitions are shown in this building. Students mostly come here to study.',
     icon: academicIcon,
     type: types.ACADEMIC
   },
@@ -101,7 +102,7 @@ export const markersDataArray = [
       lat: 44.93845519992089,
       lng: -93.16818770313091
     },
-    description: 'Macalester\'s Library. Students come here to study and they occasionally nap here too.',
+    description: 'Macalester\'s Library. Students come here to study and they occasionally nap here too. The second floor has the Idea Lab, which is a spot for students to do arts and crafts. Each floor you go up, the quieter it gets.',
     icon: libraryIcon,
     type: types.LIBRARY
   },
@@ -110,7 +111,7 @@ export const markersDataArray = [
       lat: 44.93947081646128,
       lng: -93.16763728766716
     },
-    description: 'Home of a majority of Macalester\'s dining options, as well as mailing services',
+    description: 'Cafe Mac, the Atrium, and the Loch are all dining options in the CC. Students mostly eat here, but they also come here to study and socialize.',
     icon: foodIcon,
     type: types.FOOD
   },
@@ -119,7 +120,7 @@ export const markersDataArray = [
       lat: 44.93863853335998,
       lng: -93.16919008825039
     },
-    description: 'Home of Economics',
+    description: 'Home of social sciences.',
     icon: academicIcon,
     type: types.ACADEMIC
   },
@@ -197,8 +198,8 @@ export const markersDataArray = [
       lng: -93.169895
     },
     description: 'On campus housing option that serves as a safe space for students of color and allies who are interested in learning from and contributing to a multicultural environment.',
-    icon: 'red',
-    type: ''
+    icon: dormIcon,
+    type: types.DORM
   } ,
   { name: 'Kirk Residence Hall',
     position: {
@@ -241,8 +242,17 @@ export const markersDataArray = [
       lat: 44.936143         ,
       lng: -93.168256
     },
-    description: 'Windmill',
+    description: 'This wind turbine was built in 2003. It provides and alternate source of electricity for Olin Rice.',
     icon: landmarkIcon,
+    type: types.LANDMARK
+  },
+  { name: 'Weyerhaeuser',
+    position: {
+      lat: 44.939459         ,
+      lng: -93.169202
+    },
+    description: 'Admissions building at Macalester.',
+    icon: 'red',
     type: types.LANDMARK
   }
 ];

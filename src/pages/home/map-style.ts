@@ -28,7 +28,7 @@ const style = [
         "color": "#808080"
       },
       {
-        "weight": 0.5
+        "weight": 2
       }
     ]
   },
@@ -37,6 +37,33 @@ const style = [
     "stylers": [
       {
         "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.school",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#808080"
+      },
+      {
+        "lightness": 10
+      },
+      {
+        "visibility": "on"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.school",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "color": "#808080"
+      },
+      {
+        "visibility": "on"
       }
     ]
   },
