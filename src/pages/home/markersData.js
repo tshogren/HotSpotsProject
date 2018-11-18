@@ -3,16 +3,16 @@ let academicIcon = {
   'anchor': [10, 20],
   'size': {
     width: 20,
-    height: 19
+    height: 30
   }
 };
 
 let dormIcon = {
-  'url': 'www/assets/imgs/Bed-image.jpg',
+  'url': 'www/assets/imgs/Bed-image.png',
   'anchor': [10, 20],
   'size': {
     width: 20,
-    height: 19
+    height: 30
   }
 };
 
@@ -21,7 +21,7 @@ let libraryIcon = {
   'anchor': [10, 20],
   'size': {
     width: 20,
-    height: 19
+    height: 30
   }
 };
 
@@ -30,7 +30,7 @@ let foodIcon = {
   'anchor': [10, 20],
   'size': {
     width: 20,
-    height: 19
+    height: 30
   }
 };
 let landmarkIcon = {
@@ -54,8 +54,8 @@ const types = {
 export const markersDataArray = [
   { name: 'Old Main',
     position: {
-      lat: 44.93858,
-      lng: -93.16854
+      lat: 44.93857831674198,
+      lng: -93.16869206587944
     },
     description: 'Most humanities classes are in this building. Some students come here to study.',
     icon: academicIcon,
@@ -72,8 +72,8 @@ export const markersDataArray = [
   },
   { name: 'Neill Hall',
     position: {
-      lat: 44.93725802043779,
-      lng: -93.1692529845086
+      lat: 44.93728079704348,
+      lng: -93.16928891829826
     },
     description: 'Language and humanities classes are taught in this building. Students come here to study.',
     icon: academicIcon,
@@ -90,8 +90,8 @@ export const markersDataArray = [
   },
   { name: 'Janet Wallace Fine Arts Center',
     position: {
-      lat: 44.937578182963996,
-      lng: -93.16967579323779
+      lat: 44.93762524179597,
+      lng: -93.17018330097198
     },
     description: 'Student\'s call this building \'JWall.\' Fine arts classes are taught here, and art exhibitions are shown in this building. Students mostly come here to study.',
     icon: academicIcon,
@@ -99,8 +99,8 @@ export const markersDataArray = [
   },
   { name: 'DeWitt Wallace Library',
     position: {
-      lat: 44.93845519992089,
-      lng: -93.16818770313091
+      lat: 44.9385143672714,
+      lng: -93.16810112420893
     },
     description: 'Macalester\'s Library. Students come here to study and they occasionally nap here too. The second floor has the Idea Lab, which is a spot for students to do arts and crafts. Each floor you go up, the quieter it gets.',
     icon: libraryIcon,
@@ -108,8 +108,8 @@ export const markersDataArray = [
   },
   { name: 'Ruth Stricker Dayton Campus Center',
     position: {
-      lat: 44.93947081646128,
-      lng: -93.16763728766716
+      lat: 44.93948135311272,
+      lng: -93.16755022037967
     },
     description: 'Cafe Mac, the Atrium, and the Loch are all dining options in the CC. Students mostly eat here, but they also come here to study and socialize.',
     icon: foodIcon,
@@ -117,8 +117,8 @@ export const markersDataArray = [
   },
   { name: 'Carnegie Hall',
     position: {
-      lat: 44.93863853335998,
-      lng: -93.16919008825039
+      lat: 44.93872445794575,
+      lng: -93.16922327482047
     },
     description: 'Home of social sciences.',
     icon: academicIcon,
@@ -126,8 +126,8 @@ export const markersDataArray = [
   },
   { name: 'Dupre Residence Hall',
     position: {
-      lat: 44.941034 ,
-      lng: -93.167871
+      lat: 44.941032890778374 ,
+      lng: -93.16787123680115
     },
     description: 'On campus housing and summer housing for students on campus.',
     icon: dormIcon,
@@ -135,8 +135,8 @@ export const markersDataArray = [
   },
   { name: 'Doty Residence Hall',
     position: {
-      lat: 44.940814  ,
-      lng: -93.168601
+      lat: 44.94080886036619  ,
+      lng: -93.1686007976532
     },
     description: 'On campus housing option for first years.',
     icon: dormIcon,
@@ -194,8 +194,8 @@ export const markersDataArray = [
   ,
   { name: 'Cultural House',
     position: {
-      lat: 44.940367        ,
-      lng: -93.169895
+      lat: 44.94046471607637       ,
+      lng: -93.16992284514379
     },
     description: 'On campus housing option that serves as a safe space for students of color and allies who are interested in learning from and contributing to a multicultural environment.',
     icon: dormIcon,
@@ -203,8 +203,8 @@ export const markersDataArray = [
   } ,
   { name: 'Kirk Residence Hall',
     position: {
-      lat: 44.938531         ,
-      lng: -93.16734
+      lat: 44.938519505327264,
+      lng: -93.16746534208858
     },
     description: 'On campus housing option for upperclassmen.',
     icon: dormIcon,
@@ -248,8 +248,8 @@ export const markersDataArray = [
   },
   { name: 'Weyerhaeuser',
     position: {
-      lat: 44.939459         ,
-      lng: -93.169202
+      lat: 44.939401646627275         ,
+      lng: -93.1691980491122
     },
     description: 'Admissions building at Macalester.',
     icon: 'red',

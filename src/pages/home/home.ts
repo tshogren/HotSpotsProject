@@ -123,7 +123,7 @@ export class HomePage {
     const likeManager = new LikeManager(this.afDB, frame);
 
 
-    htmlInfoWindow.setContent(frame, {width: '200px', height: '200px'});
+    htmlInfoWindow.setContent(frame, {width: '260px', height: '260px'});
     htmlInfoWindow.setBackgroundColor('white');
 
     let markerOptions = {
