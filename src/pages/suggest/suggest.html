@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons end>
+      <button id="help-button" solid ion-button>
+        <ion-icon name="help"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>
+      Suggest
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="my-content">
+  <div class="row-container" style="height: 15%;width: 100%">
+    <span class="step row-container" padding-horizontal>
+      <span><b>1</b></span>
+    </span>
+    <span class="step-text" padding-horizontal>Choose Location</span>
+  </div>
+  <div #map style="height:55%"></div>
+  <ion-item style="height: 15%" padding-right>
+    <ion-label stacked>Title</ion-label>
+    <ion-input id="input-place-name" type="text" maxlength="25" placeholder="Enter Hotspot Name"></ion-input>
+    <button id="checkmark" round class="hide" ion-button item-end>
+      <ion-icon name="checkmark"></ion-icon>
+    </button>
+  </ion-item>
+
+  <div class="row-container" style="height: 15%; width: 100%">
+    <button ion-button id="next-button" round disabled (click)="openSuggestionForm()">
+      Next
+    </button>
+  </div>
+</ion-content>

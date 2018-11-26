@@ -1,0 +1,63 @@
+<!--
+  Generated template for the SuggestFormPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Select Parameters </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+  <div class="row-container" style="height: 15%; width: 100%">
+    <span class="step row-container" padding-horizontal>
+      <span><b>2</b></span>
+    </span>
+    <span padding-horizontal>Select Type</span>
+  </div>
+
+  <div id="type-container" class="row-container">
+    <button data-type="Landmark" ion-button (click)="handleTypeSelection($event.target)">
+      <img src="assets/imgs/landmark.png">
+    </button>
+    <button ion-button data-type="Social" (click)="handleTypeSelection($event.target)">
+      <img src="assets/imgs/pin-empty.png">
+    </button>
+    <button ion-button data-type="Place of Interest" (click)="handleTypeSelection($event.target)">
+      <img src="assets/imgs/pin-empty.png">
+    </button>
+  </div>
+
+  <div class="row-container" style="height: 15%;">
+    <span class="step row-container" padding-horizontal>
+      <span><b>3</b></span>
+    </span>
+    <span padding-horizontal>Select Tags</span>
+  </div>
+
+  <div id="tag-container">
+    <button id={{tag}} ion-button *ngFor="let tag of tags" full (click)="handleTagSelection($event.target, tag)">
+      {{tag.toUpperCase()}}
+    </button>
+  </div>
+
+  <ion-item padding-right>
+    <ion-label stacked> Description </ion-label>
+    <ion-textarea id="description-input" placeholder="Up to 20 words"></ion-textarea>
+  </ion-item>
+
+  <div class="row-container" style="height: 15%">
+    <button ion-button (click)="close()">
+      Cancel
+    </button>
+    <button id="submit-button" ion-button disabled (click)="submit()">
+      Submit
+    </button>
+  </div>
+
+</ion-content>

@@ -1,0 +1,34 @@
+page-suggest {
+
+  #next-button {
+    width: 80%;
+  }
+
+  $circle-size: 30px;
+
+  .step {
+    background-color: black;
+    color: white;
+    border-radius: 50%;
+    height: $circle-size;
+    width: $circle-size;
+
+  }
+
+  .hide {
+    display: none;
+  }
+
+  .step-text {
+    color: black !important;
+  }
+  .div {
+    box-sizing: border-box;
+  }
+
+  .scroll-content
+  {
+    padding-bottom: 0 !important;
+  }
+
+}

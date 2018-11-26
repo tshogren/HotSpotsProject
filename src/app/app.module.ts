@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import {IonicApp, IonicModule, IonicErrorHandler, PopoverCmp} from 'ionic-angular';
 import { MyApp } from './app.component';
 
-import { AboutPage } from '../pages/about/about';
+import { SuggestPage } from '../pages/suggest/suggest';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -16,6 +16,8 @@ import {PopoverComponent} from "../components/popover/popover";
 import { AngularFireModule } from "@angular/fire"
 import { AngularFireDatabaseModule, AngularFireDatabase } from "@angular/fire/database"
 import { AngularFireAuthModule } from "@angular/fire/auth"
+import {Keyboard} from "@ionic-native/keyboard";
+import { SuggestionManagerProvider } from '../providers/suggestion-manager/suggestion-manager';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyANyAIWgkJ0sKXsnLSo-hi_NVeixfvAj4I",
@@ -29,7 +31,7 @@ export const firebaseConfig = {
 @NgModule({
   declarations: [
     MyApp,
-    AboutPage,
+    SuggestPage,
     ContactPage,
     HomePage,
     TabsPage,
@@ -45,7 +47,7 @@ export const firebaseConfig = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AboutPage,
+    SuggestPage,
     ContactPage,
     HomePage,
     TabsPage,
@@ -56,6 +58,8 @@ export const firebaseConfig = {
     SplashScreen,
     GoogleMaps,
     AngularFireDatabase,
+    Keyboard,
+    SuggestionManagerProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

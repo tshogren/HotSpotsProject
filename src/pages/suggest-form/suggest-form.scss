@@ -1,0 +1,59 @@
+page-suggest-form {
+
+  $circle-size: 30px;
+  ion-grid, div, ion-item {
+    box-sizing: border-box;
+  }
+
+  .step {
+    background-color: black;
+    color: white;
+    border-radius: 50%;
+    height: $circle-size;
+    width: $circle-size;
+
+  }
+
+  #tag-container {
+    margin: 0;
+    height: 20%;
+    align-content: start;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-column-gap: 10px;
+    grid-row-gap: 5px;
+    grid-auto-flow: row;
+    padding: 0 5px 0;
+  }
+
+  #description-input {
+    height: 15%
+  }
+
+
+
+  #type-container button {
+    height: 100%;
+    box-sizing: border-box;
+  }
+
+  #type-container {
+    height: 20%;
+  }
+
+  img {
+    object-fit: contain;
+    pointer-events: none;
+    //height: 80%;
+    //width: auto;
+
+  }
+
+  .selected {
+    box-shadow:inset 0px 0px 0px 2px black, 1px 1px 1px #cccccc;
+  }
+
+  .scroll-content {
+    padding-bottom: 0 !important;
+  }
+}
