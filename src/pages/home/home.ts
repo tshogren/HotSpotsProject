@@ -123,7 +123,7 @@ export class HomePage {
     const likeManager = new LikeManager(this.afDB, frame);
 
 
-    htmlInfoWindow.setContent(frame, {width: '260px', height: '260px'});
+    htmlInfoWindow.setContent(frame, {width: '300px', height: '220px'});
     htmlInfoWindow.setBackgroundColor('white');
 
     let markerOptions = {
@@ -138,6 +138,11 @@ export class HomePage {
 
 
         marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
+          let options = {
+            target: marker.getPosition()
+          };
+          this.map.moveCamera(options);
+          //this.map.panBy(0, -10);
           htmlInfoWindow.open(marker);
         });
       });

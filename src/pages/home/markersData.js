@@ -1,6 +1,6 @@
 let academicIcon = {
   'url': 'www/assets/imgs/academic-building.png',
-  'anchor': [10, 20],
+  //'anchor': [10, 30],
   'size': {
     width: 20,
     height: 30
@@ -9,7 +9,7 @@ let academicIcon = {
 
 let dormIcon = {
   'url': 'www/assets/imgs/Bed-image.png',
-  'anchor': [10, 20],
+  //'anchor': [10, 30],
   'size': {
     width: 20,
     height: 30
@@ -18,7 +18,7 @@ let dormIcon = {
 
 let libraryIcon = {
   'url': 'www/assets/imgs/library.png',
-  'anchor': [10, 20],
+  //'anchor': [10, 30],
   'size': {
     width: 20,
     height: 30
@@ -27,7 +27,7 @@ let libraryIcon = {
 
 let foodIcon = {
   'url': 'www/assets/imgs/Food.png',
-  'anchor': [10, 20],
+  //'anchor': [10, 30],
   'size': {
     width: 20,
     height: 30
@@ -35,7 +35,7 @@ let foodIcon = {
 };
 let landmarkIcon = {
   'url': 'www/assets/imgs/landmark.png',
-  'anchor': [10, 10],
+  //'anchor': [10, 30],
   'size': {
     width: 20,
     height: 30
@@ -66,7 +66,7 @@ export const markersDataArray = [
       lat: 44.937286,
       lng: -93.16766843260166
     },
-    description: 'Students call this the \'LC.\' Students come here to work out, socialize, nap, and eat at Scotty\'s, a dining option that serves burritos. Health and Wellness is also located here.',
+    description: 'Referred to as the \'LC.\' Students come here to work out, socialize, nap, and eat at Scotty\'s, a dining option that serves burritos. Health and Wellness is also located here.',
     icon: 'red',
     type: types.ATHLETIC
   },

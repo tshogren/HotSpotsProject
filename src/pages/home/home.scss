@@ -1,9 +1,9 @@
 page-home {
 
-  $info-window-width: 260px;
+  $info-window-width: 300px;
 
   :root {
-    --info-window-width: 260;
+    --info-window-width: 300px;
   }
 
   .infoHeader {
@@ -16,6 +16,7 @@ page-home {
 
   .description {
       display: block;
+      font-size: 90%;
   }
 
   .frame {

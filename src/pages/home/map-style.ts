@@ -117,7 +117,7 @@ const style = [
     "stylers": [
       {
         "visibility": "off"
-      }
+      },
     ]
   }
 ];
@@ -130,7 +130,8 @@ export const androidMap: GoogleMapOptions = {
   // styles: style,
   preferences: {
     zoom: {
-      minZoom: zoom
+      minZoom: 10,
+      maxZoom: 20
     }
   },
   building: true
@@ -143,7 +144,8 @@ export const iOSMap: GoogleMapOptions = {
   styles: style,
   preferences: {
     zoom: {
-      minZoom: zoom
+      minZoom: 10,
+      maxZoom: 20
     }
   },
   building: true
