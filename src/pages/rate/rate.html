@@ -7,12 +7,14 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>rate</ion-title>
+    <ion-title>Rate</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding-horizontal>
+
+  <suggestion-card *ngFor="let suggestion of topSuggestions | async | reverse" [suggestion]="suggestion"></suggestion-card>
 
 </ion-content>

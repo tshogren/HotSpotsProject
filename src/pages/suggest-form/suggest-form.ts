@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavParams, ViewController} from 'ionic-angular';
+import { IonicPage, NavParams, ViewController } from 'ionic-angular';
 import Color from 'color'
-import {LatLng} from "@ionic-native/google-maps";
-import {DataMap} from "../../assets/models/data-map";
-import {TagController} from "../../assets/models/tag-controller";
-import{ SuggestionManagerProvider} from "../../providers/suggestion-manager/suggestion-manager";
-import {SuggestionData} from "../../assets/models/suggestion-data.interface";
+import { LatLng } from "@ionic-native/google-maps";
+import { DataMap } from "../../assets/models/data-map";
+import { TagController } from "../../assets/models/tag-controller";
+import { SuggestionManagerProvider } from "../../providers/suggestion-manager/suggestion-manager";
+import {SuggestionData } from "../../assets/models/suggestion-data.interface";
+import { Keyboard } from "@ionic-native/keyboard";
 
 /**
  * Continuation of the process to submit a user suggestion.
@@ -19,18 +20,19 @@ import {SuggestionData} from "../../assets/models/suggestion-data.interface";
 })
 export class SuggestFormPage {
 
-  tags: Array<string> = ['athletic', 'food', 'study', 'nap', 'historic', 'art', 'loud'];
+  tags: string[] = ['athletic', 'food', 'study', 'nap', 'historic', 'art', 'loud'];
 
   private position: LatLng;
   private tagData: DataMap;
   private selectedType: string;
   private typeButtonBaseColor: string;
-  private tagControllers: Array<TagController>;
+  private tagControllers: TagController[];
 
   private markerTitle: string;
   private description: string;
 
-  constructor(public navParams: NavParams, public viewCtrl: ViewController, public suggestionManager: SuggestionManagerProvider) {
+  constructor(public navParams: NavParams, public viewCtrl: ViewController, public suggestionManager: SuggestionManagerProvider,
+              public keyboard: Keyboard) {
     this.tagControllers = [];
     this.tagData = new DataMap(this.tags);
     this.markerTitle = navParams.get('markerTitle');
@@ -54,6 +56,16 @@ export class SuggestFormPage {
       this.updateDescription();
       this.validateSubmit();
     });
+
+    let buttons: HTMLElement = document.getElementById("buttons");
+
+    this.keyboard.onKeyboardWillShow().subscribe(() => {
+      buttons.classList.add("hide");
+    });
+    this.keyboard.onKeyboardWillHide().subscribe( () => {
+      buttons.classList.remove("hide")
+    })
+
   }
 
   close() {
