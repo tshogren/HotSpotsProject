@@ -41,7 +41,19 @@ $colors: (
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #222
+  dark:       #222,
+  neutral: (
+    base: grey,
+    contrast: #ffffff
+  ),
+  upvote: (
+    base: limegreen,
+    contrast: #ffffff
+  ),
+  downvote: (
+    base: red,
+    contrast: #ffffff
+  )
 );
 
 

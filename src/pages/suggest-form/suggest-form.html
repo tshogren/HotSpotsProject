@@ -26,7 +26,7 @@
       <img src="assets/imgs/landmark.png">
     </button>
     <button ion-button data-type="Social" (click)="handleTypeSelection($event.target)">
-      <img src="assets/imgs/pin-empty.png">
+      <img src="assets/imgs/social.png">
     </button>
     <button ion-button data-type="Place of Interest" (click)="handleTypeSelection($event.target)">
       <img src="assets/imgs/pin-empty.png">
@@ -51,7 +51,7 @@
     <ion-textarea id="description-input" placeholder="Up to 20 words"></ion-textarea>
   </ion-item>
 
-  <div class="row-container" style="height: 15%">
+  <div id="buttons" class="row-container" style="height: 15%">
     <button ion-button (click)="close()">
       Cancel
     </button>
