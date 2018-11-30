@@ -1,4 +1,4 @@
-<ion-content>
+<ion-scroll scrollY="true">
 <ion-navbar text-center>
   <ion-title>Filter</ion-title>
 </ion-navbar>
@@ -10,6 +10,13 @@
       <ion-label>{{type}}</ion-label>
       <ion-checkbox [checked]="filterHelper.initialState[type]" (ionChange)="updateData(type)"></ion-checkbox>
     </ion-item>
+    <ion-item-divider>
+      Tag
+    </ion-item-divider>
+    <ion-item *ngFor="let tag of tags">
+      <ion-label>{{tag}}</ion-label>
+      <ion-checkbox [checked]="filterHelper.initialState[tag]" (ionChange)="updateData(tag)"></ion-checkbox>
+    </ion-item>
   </ion-list>
   <ion-item text-center>
   <button ion-button [default]="true" class="popover-button" (click)="close()">
@@ -19,5 +26,5 @@
     Reset
   </button>
   </ion-item>
-</ion-content>
+</ion-scroll>
 

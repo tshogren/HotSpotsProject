@@ -91,7 +91,7 @@ export class SuggestPage {
             position: markerPosition,
             disableAutoPan: true,
             icon: {
-              url: 'assets/imgs/pin-empty.png',
+              url: 'www/assets/imgs/pin-empty.png',
               size: {
                 width: 30,
                 height: 38

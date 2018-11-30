@@ -48,8 +48,21 @@ const types = {
   FOOD: 'Food',
   DORM: 'Dorm',
   ATHLETIC: 'Athletic',
-  LANDMARK: 'Landmark'
+  LANDMARK: 'Landmark',
+  OTHER: 'Other'
 };
+
+const tags = {
+  ART: 'Art',
+  ATHLETIC: 'Athletic',
+  FOOD: 'Food',
+  HISTORIC: 'Historic',
+  LOUD: 'Loud',
+  NAP: 'Nap',
+  OTHER: 'Other',
+  SOCIAL: 'Social',
+  STUDY: 'Study'
+}
 
 export const markersDataArray = [
   { name: 'Old Main',
@@ -59,7 +72,8 @@ export const markersDataArray = [
     },
     description: 'Most humanities classes are in this building. Some students come here to study.',
     icon: academicIcon,
-    type: types.ACADEMIC
+    type: types.ACADEMIC,
+    tags: [tags.NAP,tags.STUDY]
   },
   { name: 'Leonard Center',
     position: {
@@ -68,7 +82,8 @@ export const markersDataArray = [
     },
     description: 'Referred to as the \'LC.\' Students come here to work out, socialize, nap, and eat at Scotty\'s, a dining option that serves burritos. Health and Wellness is also located here.',
     icon: 'red',
-    type: types.ATHLETIC
+    type: types.ATHLETIC,
+    tags: [tags.ATHLETIC, tags.FOOD, tags.LOUD, tags.NAP,tags.SOCIAL,tags.STUDY]
   },
   { name: 'Neill Hall',
     position: {
@@ -77,7 +92,8 @@ export const markersDataArray = [
     },
     description: 'Language and humanities classes are taught in this building. Students come here to study.',
     icon: academicIcon,
-    type: types.ACADEMIC
+    type: types.ACADEMIC,
+    tags: [tags.STUDY]
   },
   { name: 'Olin-Rice Science Center ',
     position: {
@@ -86,7 +102,8 @@ export const markersDataArray = [
     },
     description: 'Macalester\'s math and science building. Students use this space for studying and there are also a few good spots for napping.',
     icon: academicIcon,
-    type: types.ACADEMIC
+    type: types.ACADEMIC,
+    tags: [tags.NAP,tags.STUDY]
   },
   { name: 'Janet Wallace Fine Arts Center',
     position: {
@@ -95,7 +112,8 @@ export const markersDataArray = [
     },
     description: 'Student\'s call this building \'JWall.\' Fine arts classes are taught here, and art exhibitions are shown in this building. Students mostly come here to study.',
     icon: academicIcon,
-    type: types.ACADEMIC
+    type: types.ACADEMIC,
+    tags: [tags.ART]
   },
   { name: 'DeWitt Wallace Library',
     position: {
@@ -104,7 +122,8 @@ export const markersDataArray = [
     },
     description: 'Macalester\'s Library. Students come here to study and they occasionally nap here too. The second floor has the Idea Lab, which is a spot for students to do arts and crafts. Each floor you go up, the quieter it gets.',
     icon: libraryIcon,
-    type: types.LIBRARY
+    type: types.LIBRARY,
+    tags: [tags.FOOD,tags.STUDY]
   },
   { name: 'Ruth Stricker Dayton Campus Center',
     position: {
@@ -113,7 +132,8 @@ export const markersDataArray = [
     },
     description: 'Cafe Mac, the Atrium, and the Loch are all dining options in the CC. Students mostly eat here, but they also come here to study and socialize.',
     icon: foodIcon,
-    type: types.FOOD
+    type: types.FOOD,
+    tags: [tags.FOOD,tags.SOCIAL,tags.STUDY]
   },
   { name: 'Carnegie Hall',
     position: {
@@ -122,7 +142,8 @@ export const markersDataArray = [
     },
     description: 'Home of social sciences.',
     icon: academicIcon,
-    type: types.ACADEMIC
+    type: types.ACADEMIC,
+    tags: [tags.STUDY]
   },
   { name: 'Dupre Residence Hall',
     position: {
@@ -131,7 +152,8 @@ export const markersDataArray = [
     },
     description: 'On campus housing and summer housing for students on campus.',
     icon: dormIcon,
-    type: types.DORM
+    type: types.DORM,
+    tags: [tags.NAP,tags.SOCIAL,tags.STUDY]
   },
   { name: 'Doty Residence Hall',
     position: {
@@ -140,7 +162,8 @@ export const markersDataArray = [
     },
     description: 'On campus housing option for first years.',
     icon: dormIcon,
-    type: types.DORM
+    type: types.DORM,
+    tags: [tags.NAP,tags.SOCIAL,tags.STUDY]
   },
   { name: 'Bigelow Residence Hall',
     position: {
@@ -149,7 +172,8 @@ export const markersDataArray = [
     },
     description: 'On campus housing option for underclassmen.',
     icon: dormIcon,
-    type: types.DORM
+    type: types.DORM,
+    tags: [tags.NAP,tags.SOCIAL,tags.STUDY]
   },
   { name: 'Turk Residence Hall',
     position: {
@@ -158,7 +182,8 @@ export const markersDataArray = [
     },
     description: 'On campus housing option for first years.',
     icon: dormIcon,
-    type: types.DORM
+    type: types.DORM,
+    tags: [tags.NAP,tags.SOCIAL,tags.STUDY]
   }
   ,
   { name: '30 Mac Residence Hall',
@@ -168,7 +193,8 @@ export const markersDataArray = [
     },
     description: 'On campus housing option where residents agree to a healthy living and substance free lifestyle.',
     icon: dormIcon,
-    type: types.DORM
+    type: types.DORM,
+    tags: [tags.NAP,tags.SOCIAL,tags.STUDY]
   }
   ,
   { name: 'Wallace Residence Hall',
@@ -178,7 +204,8 @@ export const markersDataArray = [
     },
     description: 'On campus housing option, reserved for sophomores.',
     icon: dormIcon,
-    type: types.DORM
+    type: types.DORM,
+    tags: [tags.NAP,tags.SOCIAL,tags.STUDY]
   }
   ,
   {
@@ -189,7 +216,8 @@ export const markersDataArray = [
     },
     description: 'On campus housing option for upperclassmen. Rooms are suite style.',
     icon: dormIcon,
-    type: types.DORM
+    type: types.DORM,
+    tags: [tags.NAP,tags.SOCIAL,tags.STUDY]
   }
   ,
   { name: 'Cultural House',
@@ -199,7 +227,8 @@ export const markersDataArray = [
     },
     description: 'On campus housing option that serves as a safe space for students of color and allies who are interested in learning from and contributing to a multicultural environment.',
     icon: dormIcon,
-    type: types.DORM
+    type: types.DORM,
+    tags: [tags.NAP,tags.SOCIAL,tags.STUDY]
   } ,
   { name: 'Kirk Residence Hall',
     position: {
@@ -208,7 +237,8 @@ export const markersDataArray = [
     },
     description: 'On campus housing option for upperclassmen.',
     icon: dormIcon,
-    type: types.DORM
+    type: types.DORM,
+    tags: [tags.NAP,tags.SOCIAL,tags.STUDY]
   } ,
   { name: 'The Rock',
     position: {
@@ -217,7 +247,8 @@ export const markersDataArray = [
     },
     description: 'The Rock',
     icon: landmarkIcon,
-    type: types.LANDMARK
+    type: types.LANDMARK,
+    tags: [tags.HISTORIC]
   } ,
   { name: 'The Bell',
     position: {
@@ -226,7 +257,8 @@ export const markersDataArray = [
     },
     description: 'The Bell',
     icon: landmarkIcon,
-    type: types.LANDMARK
+    type: types.LANDMARK,
+    tags: [tags.HISTORIC]
   } ,
   { name: 'Shaw Field',
     position: {
@@ -235,7 +267,8 @@ export const markersDataArray = [
     },
     description: 'Shaw Field',
     icon: landmarkIcon,
-    type: types.LANDMARK
+    type: types.LANDMARK,
+    tags: [tags.SOCIAL]
   } ,
   { name: 'Windmill',
     position: {
@@ -244,7 +277,8 @@ export const markersDataArray = [
     },
     description: 'This wind turbine was built in 2003. It provides and alternate source of electricity for Olin Rice.',
     icon: landmarkIcon,
-    type: types.LANDMARK
+    type: types.LANDMARK,
+    tags: [tags.HISTORIC]
   },
   { name: 'Weyerhaeuser',
     position: {
@@ -253,6 +287,7 @@ export const markersDataArray = [
     },
     description: 'Admissions building at Macalester.',
     icon: 'red',
-    type: types.LANDMARK
+    type: types.OTHER,
+    tags: [tags.OTHER]
   }
 ];

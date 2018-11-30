@@ -18,6 +18,7 @@ export class PopoverComponent {
   filterHelper: FilterHelper;
   types: Array<string>;
   data;
+  tags: Array<string>;
 
   constructor(public navParams: NavParams, public viewCtr: ViewController, public events: Events) {
     console.log('Hello PopoverComponent Component');
@@ -26,6 +27,7 @@ export class PopoverComponent {
     console.log(this.filterHelper);
     this.types = this.filterHelper.types;
     this.data = this.filterHelper.data;
+    this.tags = this.filterHelper.tags;
 
     // console.log('PopoverLeave set to');
     // console.log(config.get('pop'))

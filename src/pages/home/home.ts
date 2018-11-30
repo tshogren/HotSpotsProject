@@ -88,7 +88,7 @@ export class HomePage {
   addMarker(markerData) {
 
     // TODO: Give markers a tags paramater (String array) and destructure it here
-    const {name, position, description, icon, type} = markerData;
+    const {name, position, description, icon, type, tags} = markerData;
 
     //Uncomment following line and run app to easily add/update our database references if/when we add markers (only for likes)
     // this.afDB.list('/markerLikes').update(name, {likes: 0});
@@ -98,7 +98,7 @@ export class HomePage {
     let frame = document.createElement('div');
 
     // example tags
-    let tags = ["academic", "food", "foo", "bar", "athletic"];
+    //let tags = ["academic", "food", "foo", "bar", "athletic"];
 
     frame.setAttribute('class', 'frame');
     frame.innerHTML = [`<h5 id="title" class="infoHeader">${name}</h5>`,
@@ -117,6 +117,34 @@ export class HomePage {
       tagDisplay.classList.add('tag');
       tagDisplay.textContent = tag.toUpperCase();
 
+      if(tagDisplay.textContent == 'ART'){
+        tagDisplay.style.backgroundColor = 'red';
+      }
+      else if(tagDisplay.textContent == 'ATHLETIC'){
+        tagDisplay.style.backgroundColor = 'orange';
+      }
+      else if(tagDisplay.textContent == 'FOOD'){
+        tagDisplay.style.backgroundColor = 'yellow';
+      }
+      else if(tagDisplay.textContent == 'HISTORIC'){
+        tagDisplay.style.backgroundColor = 'green';
+      }
+      else if(tagDisplay.textContent == 'LOUD'){
+        tagDisplay.style.backgroundColor = 'aqua';
+      }
+      else if(tagDisplay.textContent == 'NAP'){
+        tagDisplay.style.backgroundColor = 'plum';
+      }
+      else if(tagDisplay.textContent == 'OTHER'){
+        tagDisplay.style.backgroundColor = 'blue violet';
+      }
+      else if(tagDisplay.textContent == 'SOCIAL'){
+        tagDisplay.style.backgroundColor = 'pink';
+      }
+      else if(tagDisplay.textContent == 'STUDY'){
+        tagDisplay.style.backgroundColor = 'chocolate';
+      }
+
       frame.querySelector('#tag-container').appendChild(tagDisplay);
     });
 
@@ -134,7 +162,7 @@ export class HomePage {
     this.map.addMarker(markerOptions)
       .then(marker => {
         console.log('Marker added');
-        this.markers.push(new MarkerModel(marker, name, type, htmlInfoWindow, frame));
+        this.markers.push(new MarkerModel(marker, name, type, htmlInfoWindow, frame, tags));
 
 
         marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
@@ -198,6 +226,11 @@ export class HomePage {
         else {
           console.log('Something was unaccounted for. Marker: ' + markerModel.title);
         }
+      }
+      let markerTag = markerModel.tags;
+      for(let index = 0; index < markerTag.length; index++)
+      if(filterData[markerTag[index]] === true){
+        markerModel.showMarker();
       }
     });
 
