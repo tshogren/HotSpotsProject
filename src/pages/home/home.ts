@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild} from '@angular/core';
 import { NavController, Platform, Events, ToastController } from 'ionic-angular';
-import { GoogleMap, GoogleMaps, GoogleMapsEvent, LatLng, GoogleMapOptions, HtmlInfoWindow } from "@ionic-native/google-maps";
+import { GoogleMap, GoogleMaps, GoogleMapsEvent, LatLng, GoogleMapOptions, HtmlInfoWindow} from "@ionic-native/google-maps";
 import * as _ from 'underscore';
 
 import { mapStyle } from './mapStyle';
@@ -151,12 +151,13 @@ export class HomePage {
     const likeManager = new LikeManager(this.afDB, frame);
 
 
-    htmlInfoWindow.setContent(frame, {width: '300px', height: '220px'});
+    htmlInfoWindow.setContent(frame, {width: '250px', height: '250px'});
     htmlInfoWindow.setBackgroundColor('white');
 
     let markerOptions = {
       icon: icon,
       position: position,
+      disableAutoPan: true
     };
 
     this.map.addMarker(markerOptions)
@@ -166,11 +167,23 @@ export class HomePage {
 
 
         marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
-          let options = {
-            target: marker.getPosition()
-          };
-          this.map.moveCamera(options);
+          //  let options = {
+          //    target: marker.getPosition(),
+          //    duration: 100
+          // };
+          let positionPixel;
+            this.map.fromLatLngToPoint(marker.getPosition())
+              .then(point => {
+                positionPixel = point;
+                console.log("Position in pixels");
+                let screenHeight = this.platform.height();
+                let screenWidth = this.platform.width();
+                this.map.panBy(0.5*screenWidth-positionPixel[0],0.6*screenHeight-positionPixel[1]);
+                setTimeout(100);
+              });
+          //this.map.animateCamera(options);
           //this.map.panBy(0, -10);
+          //this.map.panBy(0,-10);
           htmlInfoWindow.open(marker);
         });
       });

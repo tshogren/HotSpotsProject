@@ -35,14 +35,14 @@ export class MyApp {
       //
       // });
       this.storage.get('userData').then(value => {
-        console.log(value);
-        if (value) {
-          this.rootPage = TabsPage
-        }
-        else {
-          this.rootPage = 'Intro';
-          this.storage.set('userData', true);
-        }
+          console.log(value);
+          if (value) {
+            this.rootPage = TabsPage
+          }
+          else {
+            this.rootPage = 'Intro';
+            this.storage.set('userData', true);
+          }
 
         },
         err => console.log(err))
@@ -59,6 +59,5 @@ export class MyApp {
     this.loader.present();
   }
 }
-
 
 
