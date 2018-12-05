@@ -113,7 +113,7 @@ export const markersDataArray = [
     description: 'Student\'s call this building \'JWall.\' Music, art, and performance classes are taught here. Art exhibitions are displayed in this building. Students mostly come here to study.',
     icon: academicIcon,
     type: types.ACADEMIC,
-    tags: [tags.ART]
+    tags: [tags.ART, tags.STUDY]
   },
   { name: 'DeWitt Wallace Library',
     position: {
@@ -123,7 +123,7 @@ export const markersDataArray = [
     description: 'Macalester\'s Library. Students come here to study and they occasionally nap here too. The second floor has the Idea Lab, which is a spot for students to do arts and crafts. Each floor you go up, the quieter it gets.',
     icon: libraryIcon,
     type: types.LIBRARY,
-    tags: [tags.FOOD,tags.STUDY]
+    tags: [tags.NAP,tags.STUDY]
   },
   { name: 'Ruth Stricker Dayton Campus Center',
     position: {
@@ -268,7 +268,7 @@ export const markersDataArray = [
     description: 'Club and intramural teams practice here. When the weather is nice, students come to Shaw Field to study and socialize.',
     icon: landmarkIcon,
     type: types.LANDMARK,
-    tags: [tags.SOCIAL]
+    tags: [tags.SOCIAL, tags.ATHLETIC]
   } ,
   { name: 'Windmill',
     position: {
@@ -318,7 +318,8 @@ export const markersDataArray = [
     },
     description: 'Off campus restaurant that serves smoothies and juice.',
     icon: foodIcon,
-    type: types.FOOD
+    type: types.FOOD,
+    tags: [tags.FOOD]
   },
   { name: 'Dunn Bros',
     position: {
@@ -328,7 +329,7 @@ export const markersDataArray = [
     description: 'Coffee shop off campus. Students come here to eat, study, and socialize.',
     icon: foodIcon,
     type: types.FOOD,
-    tags: [tags.FOOD]
+    tags: [tags.FOOD, tags.STUDY, tags.SOCIAL]
   },
   { name: 'Caribou Coffee',
     position: {
