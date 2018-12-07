@@ -147,17 +147,17 @@ export const markersDataArray = [
   },
   { name: 'Dupre Residence Hall',
     position: {
-      lat: 44.941032890778374 ,
+      lat: 44.94107 ,
       lng: -93.16787123680115
     },
-    description: 'On campus housing and summer housing for students on campus. There is a computer lab on the second floor. There are singles, doubles, triples, and quads. The floors are co-ed.',
+    description: 'On campus housing and summer housing for students. There is a computer lab on the second floor. There are singles, doubles, triples, and quads. The floors are co-ed.',
     icon: dormIcon,
     type: types.DORM,
     tags: [tags.NAP,tags.SOCIAL,tags.STUDY]
   },
   { name: 'Doty Residence Hall',
     position: {
-      lat: 44.94080886036619  ,
+      lat: 44.94088,
       lng: -93.1686007976532
     },
     description: 'On campus housing option for first years. Floors are single gender only. The rooms are doubles and there are sinks in every room. There is a computer lab in the basement.',
@@ -167,7 +167,7 @@ export const markersDataArray = [
   },
   { name: 'Bigelow Residence Hall',
     position: {
-      lat: 44.940447    ,
+      lat: 44.94045    ,
       lng: -93.169131
     },
     description: 'On campus housing option for underclassmen.',
@@ -177,7 +177,7 @@ export const markersDataArray = [
   },
   { name: 'Turck Residence Hall',
     position: {
-      lat: 44.94042    ,
+      lat: 44.94045    ,
       lng: -93.168612
     },
     description: 'On campus housing option for first years. The rooms are doubles and they all have sinks. Floors are co-ed',
@@ -188,8 +188,8 @@ export const markersDataArray = [
   ,
   { name: '30 Mac Residence Hall',
     position: {
-      lat: 44.940757     ,
-      lng: -93.169085
+      lat: 44.94087     ,
+      lng: -93.169075
     },
     description: 'On campus housing option where residents agree to a healthy living and substance free lifestyle. There are 24 hour quiet hours in this dorm.',
     icon: dormIcon,
@@ -199,7 +199,7 @@ export const markersDataArray = [
   ,
   { name: 'Wallace Residence Hall',
     position: {
-      lat: 44.94111      ,
+      lat: 44.94105     ,
       lng: -93.169027
     },
     description: 'On campus housing option, reserved for sophomores.',
@@ -222,7 +222,7 @@ export const markersDataArray = [
   ,
   { name: 'Cultural House',
     position: {
-      lat: 44.94046471607637       ,
+      lat: 44.94055    ,
       lng: -93.16992284514379
     },
     description: 'On campus housing option that serves as a safe space for students of color and allies who are interested in learning from and contributing to a multicultural environment.',
@@ -255,7 +255,7 @@ export const markersDataArray = [
       lat: 44.939273         ,
       lng: -93.168958
     },
-    description: 'The Bell was a gift from the classes of 1927 and 1928. It was the first bell in Minnesota. Students have created a tradition with this bell.',
+    description: 'The Bell was a gift from the classes of 1927 and 1928. It was the first bell in Minnesota. Since it has been here, students have created a tradition with this bell.',
     icon: landmarkIcon,
     type: types.LANDMARK,
     tags: [tags.HISTORIC]
@@ -275,7 +275,7 @@ export const markersDataArray = [
       lat: 44.936143         ,
       lng: -93.168256
     },
-    description: 'This wind turbine was built in 2003. It provides and alternate source of electricity for Olin Rice.',
+    description: 'This wind turbine was built in 2003. It provides an alternate source of electricity for Olin Rice.',
     icon: landmarkIcon,
     type: types.LANDMARK,
     tags: [tags.HISTORIC]
@@ -303,7 +303,7 @@ export const markersDataArray = [
   },
   { name: 'Breadsmith',
     position: {
-      lat: 44.94023        ,
+      lat: 44.94033        ,
       lng: -93.1668
     },
     description: 'Off campus restaurant that serves an assortment of baked goods.',
@@ -313,8 +313,8 @@ export const markersDataArray = [
   },
   { name: 'Jamba Juice',
     position: {
-      lat: 44.94032         ,
-      lng: -93.166776
+      lat: 44.94033         ,
+      lng: -93.16665
     },
     description: 'Off campus restaurant that serves smoothies and juice.',
     icon: foodIcon,
