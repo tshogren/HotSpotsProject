@@ -7,19 +7,19 @@ export class BoundsChecker {
   private defaultCenter: LatLng;
 
   private redirectionBounds = {
-    northeast: {lat: 44.941478, lng: -93.166986},
-    northwest: {lat: 44.941478, lng: -93.171052},
-    southwest: {lat: 44.934207, lng: -93.171052},
-    southeast: {lat: 44.934207, lng: -93.166986},
-    north: 44.941478,
+    northeast: {lat: 44.943478, lng: -93.164986},
+    northwest: {lat: 44.943478, lng: -93.173052},
+    southwest: {lat: 44.934207, lng: -93.173052},
+    southeast: {lat: 44.934207, lng: -93.164986},
+    north: 44.943478,
     south: 44.93420,
-    east: -93.166986,
-    west: -93.171052
+    east: -93.164986,
+    west: -93.173052
   };
 
   private panningBounds: LatLngBounds = new LatLngBounds([
-    {lat: 44.942920, lng: -93.164441},
-    {lat: 44.932427, lng: -93.173863}
+    {lat: 44.945920, lng: -93.162441},
+    {lat: 44.932427, lng: -93.171863}
     ]);
 
   private mapWidth;
