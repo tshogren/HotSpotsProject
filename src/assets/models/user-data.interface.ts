@@ -4,5 +4,5 @@ export interface UserData {
   likedPlaces: string[];
   downvotedPlaces: string[];
   addedPlaces: Place[];
-  visitedPages?: string[];
+  visitedPages: string[];
 }

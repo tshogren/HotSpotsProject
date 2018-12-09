@@ -59,7 +59,8 @@ export class MyApp {
       let newUser: UserData = {
         likedPlaces: [],
         downvotedPlaces: [],
-        addedPlaces: defaultSuggestions
+        addedPlaces: defaultSuggestions,
+        visitedPages: []
       };
       User.initialize(newUser);
       this.rootPage = 'Intro';
