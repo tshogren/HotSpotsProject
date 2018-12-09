@@ -46,10 +46,11 @@ let landmarkIcon = {
 const types = {
   ACADEMIC: 'Academic',
   LIBRARY: 'Library',
-  FOOD: 'Food',
+  DINING: 'Dining',
   DORM: 'Dorm',
   ATHLETIC: 'Athletic',
-  LANDMARK: 'Landmark'
+  LANDMARK: 'Landmark',
+  OTHER: 'Other'
 };
 
 export const markersDataArray = [
@@ -114,7 +115,7 @@ export const markersDataArray = [
     },
     description: 'Cafe Mac, the Atrium, and the Loch are all dining options in the CC. Students mostly eat here, but they also come here to study and socialize.',
     icon: foodIcon,
-    type: types.FOOD
+    type: types.DINING
   },
   { name: 'Carnegie Hall',
     position: {
@@ -254,7 +255,7 @@ export const markersDataArray = [
     },
     description: 'Admissions, disability services, and financial aid are located in this building.',
     icon: 'red',
-    type: types.LANDMARK
+    type: types.OTHER
   },
   { name: 'The Highlander',
     position: {
@@ -272,7 +273,7 @@ export const markersDataArray = [
     },
     description: 'Off campus restaurant that serves an assortment of baked goods.',
     icon: foodIcon,
-    type: types.FOOD
+    type: types.DINING
   },
   { name: 'Jamba Juice',
     position: {
@@ -281,7 +282,7 @@ export const markersDataArray = [
     },
     description: 'Off campus restaurant that serves smoothies and juice.',
     icon: foodIcon,
-    type: types.FOOD
+    type: types.DINING
   },
   { name: 'Dunn Bros',
     position: {
@@ -290,7 +291,7 @@ export const markersDataArray = [
     },
     description: 'Coffee shop off campus. Students come here to eat, study, and socialize.',
     icon: foodIcon,
-    type: types.FOOD
+    type: types.DINING
   },
   { name: 'Caribou Coffee',
     position: {
@@ -299,7 +300,7 @@ export const markersDataArray = [
     },
     description: 'Off campus coffee shop. Students come here to study, eat, and socialize.',
     icon: foodIcon,
-    type: types.FOOD
+    type: types.DINING
   },
   { name: 'Shish',
     position: {
@@ -308,7 +309,7 @@ export const markersDataArray = [
     },
     description: 'Off campus restaurant that serves mediterranean food.',
     icon: foodIcon,
-    type: types.FOOD
+    type: types.DINING
   },
   { name: 'My Burger',
     position: {
@@ -317,7 +318,7 @@ export const markersDataArray = [
     },
     description: 'Off campus restaurant that serves burgers and shakes.',
     icon: foodIcon,
-    type: types.FOOD
+    type: types.DINING
   }
 
 ];

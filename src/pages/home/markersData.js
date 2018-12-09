@@ -45,7 +45,7 @@ let landmarkIcon = {
 const types = {
   ACADEMIC: 'Academic',
   LIBRARY: 'Library',
-  FOOD: 'Food',
+  DINING: 'Dining',
   DORM: 'Dorm',
   ATHLETIC: 'Athletic',
   LANDMARK: 'Landmark',
@@ -132,7 +132,7 @@ export const markersDataArray = [
     },
     description: 'Cafe Mac, the Atrium, and the Loch are all dining options in the CC. Students mostly eat here, but they also come here to study and socialize.',
     icon: foodIcon,
-    type: types.FOOD,
+    type: types.DINING,
     tags: [tags.FOOD,tags.SOCIAL,tags.STUDY]
   },
   { name: 'Carnegie Hall',
@@ -308,7 +308,7 @@ export const markersDataArray = [
     },
     description: 'Off campus restaurant that serves an assortment of baked goods.',
     icon: foodIcon,
-    type: types.FOOD,
+    type: types.DINING,
     tags: [tags.FOOD]
   },
   { name: 'Jamba Juice',
@@ -318,7 +318,7 @@ export const markersDataArray = [
     },
     description: 'Off campus restaurant that serves smoothies and juice.',
     icon: foodIcon,
-    type: types.FOOD,
+    type: types.DINING,
     tags: [tags.FOOD]
   },
   { name: 'Dunn Bros',
@@ -328,7 +328,7 @@ export const markersDataArray = [
     },
     description: 'Coffee shop off campus. Students come here to eat, study, and socialize.',
     icon: foodIcon,
-    type: types.FOOD,
+    type: types.DINING,
     tags: [tags.FOOD, tags.STUDY, tags.SOCIAL]
   },
   { name: 'Caribou Coffee',
@@ -338,7 +338,7 @@ export const markersDataArray = [
     },
     description: 'Off campus coffee shop. Students come here to study, eat, and socialize.',
     icon: foodIcon,
-    type: types.FOOD,
+    type: types.DINING,
     tags: [tags.FOOD,tags.SOCIAL,tags.STUDY]
   },
   { name: 'Shish',
@@ -348,7 +348,7 @@ export const markersDataArray = [
     },
     description: 'Off campus restaurant that serves mediterranean food.',
     icon: foodIcon,
-    type: types.FOOD,
+    type: types.DINING,
     tags: [tags.FOOD]
   },
   { name: 'My Burger',
@@ -358,7 +358,7 @@ export const markersDataArray = [
     },
     description: 'Off campus restaurant that serves burgers and shakes.',
     icon: foodIcon,
-    type: types.FOOD,
+    type: types.DINING,
     tags: [tags.FOOD]
   }
 
