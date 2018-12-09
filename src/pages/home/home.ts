@@ -1,6 +1,14 @@
 import { Component, ElementRef, ViewChild} from '@angular/core';
 import { NavController, Platform, Events, ToastController } from 'ionic-angular';
-import { GoogleMap, GoogleMaps, GoogleMapsEvent, LatLng, GoogleMapOptions, HtmlInfoWindow} from "@ionic-native/google-maps";
+import {
+  GoogleMap,
+  GoogleMaps,
+  GoogleMapsEvent,
+  LatLng,
+  GoogleMapOptions,
+  HtmlInfoWindow,
+  Marker, ILatLng, GoogleMapsAnimation
+} from "@ionic-native/google-maps";
 import * as _ from 'underscore';
 
 import { mapStyle } from './mapStyle';
@@ -13,6 +21,9 @@ import { FilterHelper } from "./FilterHelper";
 import { BoundsChecker } from "../../assets/models/bounds-checker";
 import { LikeManager } from "../../assets/models/like-manager";
 import { AngularFireDatabase } from "@angular/fire/database";
+import { User } from "../../assets/models/user";
+import {Observable} from "rxjs";
+import {Place} from "../../assets/models/place.interface";
 
 @Component({
   selector: 'page-home',
@@ -24,21 +35,26 @@ export class HomePage {
   private mapElement: ElementRef;
   private map: GoogleMap;
   private boundsChecker: BoundsChecker;
-  private location: LatLng;
+  private center: LatLng;
 
-  private markers = [];
+  private markerData: Place[];
+  private markers: MarkerModel[];
   private filterHelper: FilterHelper;
+
+  private addedMarker$: Observable<Place>;
+  private removedMarker$: Observable<string>;
 
   // public navCtrl: NavController
   constructor(private platform: Platform,
-              private  googleMaps: GoogleMaps,
               public popoverCtrl: PopoverController,
               public events: Events,
               public toaster: ToastController,
               public afDB: AngularFireDatabase) {
 
-    this.location = new LatLng(44.937907, -93.168582);
+    this.center = new LatLng(44.937907, -93.168582);
     this.filterHelper = new FilterHelper();
+    this.markerData = User.getAddedPlaces();                             // Change marker data to markersDataArray to get
+    this.markers = [];                                                   // markers from the js file instead
 
     events.subscribe('filter:data-passed', filterData => {
       this.filter(filterData);
@@ -47,13 +63,16 @@ export class HomePage {
       this.markers.forEach((markerModel: MarkerModel) => {
         markerModel.showMarker();
       })
-    })
+    });
 
+    this.addedMarker$ = User.getAddedPlace();
+    this.removedMarker$ = User.getRemovedPlace();
   }
 
   /** Loads map after page is ready and attaches event listeners. */
   ionViewDidLoad() {
     console.log('Home page loaded');
+    console.log(document.getElementsByClassName('pgm-info-tail-erase-border'));
     this.platform.ready().then(() => {
       let element = this.mapElement.nativeElement;
 
@@ -63,42 +82,53 @@ export class HomePage {
 
       this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
         let options = {
-          target: this.location,
+          target: this.center,
           zoom: 17
         };
 
         this.map.moveCamera(options);
-        console.log(markersDataArray);
+        console.log(this.markerData);
 
-        this.boundsChecker = new BoundsChecker(this.map, this.location, this.toaster);
+        this.boundsChecker = new BoundsChecker(this.map, this.center, this.toaster);
 
         this.map.on(GoogleMapsEvent.MAP_DRAG_END).subscribe(() => {
           this.boundsChecker.checkBounds(this.map.getVisibleRegion(), this.map.getCameraPosition());
         });
 
-        for (let i = 0; i < markersDataArray.length; i++) { // don't enumerate, use sequential for loop
-          this.addMarker(markersDataArray[i]);
-        }
+
+        this.markerData.forEach(markerData => {
+          this.addMarker(markerData);
+        })
 
       })
     });
 
+    this.addedMarker$.subscribe(marker => {
+      console.log(marker);
+      this.addMarker(marker, GoogleMapsAnimation.BOUNCE);
+      console.log(this.markers);
+    });
+    this.removedMarker$.subscribe(name => {
+      console.log(name);
+      this.removeMarker(name);
+
+    });
   }
 
-  addMarker(markerData) {
+  addMarker(markerData, animation = null) {
 
     // TODO: Give markers a tags paramater (String array) and destructure it here
     const {name, position, description, icon, type, tags} = markerData;
 
     //Uncomment following line and run app to easily add/update our database references if/when we add markers (only for likes)
     // this.afDB.list('/markerLikes').update(name, {likes: 0});
-
+    console.log(icon);
+    console.log(icon["url"]);
+    if (this.platform.is("android")) this.resolveURL(icon);
 
     let htmlInfoWindow = new HtmlInfoWindow();
     let frame = document.createElement('div');
 
-    // example tags
-    //let tags = ["academic", "food", "foo", "bar", "athletic"];
 
     frame.setAttribute('class', 'frame');
     frame.innerHTML = [`<h5 id="title" class="infoHeader">${name}</h5>`,
@@ -111,51 +141,26 @@ export class HomePage {
     ].join('');
 
     // adding tags to markers
-    tags.forEach(tag => {
+    if (tags) {
+      tags.forEach(tagName => {
 
-      let tagDisplay = document.createElement('span');
-      tagDisplay.classList.add('tag');
-      tagDisplay.textContent = tag.toUpperCase();
+        let tagDisplay = document.createElement('span');
+        tagDisplay.classList.add('tag', `tag-${tagName.toLowerCase()}`);
+        tagDisplay.textContent = tagName.toUpperCase();
 
-      if(tagDisplay.textContent == 'ART'){
-        tagDisplay.style.backgroundColor = 'red';
-      }
-      else if(tagDisplay.textContent == 'ATHLETIC'){
-        tagDisplay.style.backgroundColor = 'orange';
-      }
-      else if(tagDisplay.textContent == 'FOOD'){
-        tagDisplay.style.backgroundColor = 'yellow';
-      }
-      else if(tagDisplay.textContent == 'HISTORIC'){
-        tagDisplay.style.backgroundColor = 'green';
-      }
-      else if(tagDisplay.textContent == 'LOUD'){
-        tagDisplay.style.backgroundColor = 'aqua';
-      }
-      else if(tagDisplay.textContent == 'NAP'){
-        tagDisplay.style.backgroundColor = 'plum';
-      }
-      else if(tagDisplay.textContent == 'OTHER'){
-        tagDisplay.style.backgroundColor = 'blue violet';
-      }
-      else if(tagDisplay.textContent == 'SOCIAL'){
-        tagDisplay.style.backgroundColor = 'pink';
-      }
-      else if(tagDisplay.textContent == 'STUDY'){
-        tagDisplay.style.backgroundColor = 'chocolate';
-      }
-
-      frame.querySelector('#tag-container').appendChild(tagDisplay);
-    });
+        frame.querySelector('#tag-container').appendChild(tagDisplay);
+      });
+    }
 
     const likeManager = new LikeManager(this.afDB, frame);
 
 
     htmlInfoWindow.setContent(frame, {width: '250px', height: '250px'});
-    htmlInfoWindow.setBackgroundColor('white');
+    // htmlInfoWindow.setBackgroundColor('');
 
     let markerOptions = {
       icon: icon,
+      animation: animation,
       position: position,
       disableAutoPan: true
     };
@@ -167,24 +172,8 @@ export class HomePage {
 
 
         marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
-          //  let options = {
-          //    target: marker.getPosition(),
-          //    duration: 100
-          // };
-          let positionPixel;
-            this.map.fromLatLngToPoint(marker.getPosition())
-              .then(point => {
-                positionPixel = point;
-                console.log("Position in pixels");
-                let screenHeight = this.platform.height();
-                let screenWidth = this.platform.width();
-                this.map.panBy(0.5*screenWidth-positionPixel[0],0.6*screenHeight-positionPixel[1]);
-                setTimeout(100);
-              });
-          //this.map.animateCamera(options);
-          //this.map.panBy(0, -10);
-          //this.map.panBy(0,-10);
           htmlInfoWindow.open(marker);
+          this.panMarker(marker, .25);
         });
       });
   }
@@ -215,35 +204,35 @@ export class HomePage {
 
   filter(filterData) {
 
-    this.markers.forEach((markerModel: MarkerModel) => {
+    this.markers.forEach(marker => {
 
       console.log('Marker Model:');
-      console.log(markerModel);
-      console.log('Marker type' + markerModel.type);
-      console.log('Checky: ' + markerModel.type + ', ' + filterData[markerModel.type]);
+      console.log(marker);
+      console.log('Marker type' + marker.type);
+      console.log('Checky: ' + marker.type + ', ' + filterData[marker.type]);
 
-      let markerType = markerModel.type;
+      let markerType = marker.type;
       console.log('Checky 2: ' + markerType + ', ' + filterData[markerType]);
 
       if(filterData[markerType] !== undefined) { // Only doing this now to account for some markers not having a type
 
 
         if(filterData[markerType] === true) {
-          markerModel.showMarker();
+          marker.showMarker();
           console.log('Made Visible');
         }
         else if (filterData[markerType] === false) {
-          markerModel.hideMarker();
+          marker.hideMarker();
           console.log('Made Invisible');
         }
         else {
-          console.log('Something was unaccounted for. Marker: ' + markerModel.title);
+          console.log('Something was unaccounted for. Marker: ' + marker.title);
         }
       }
-      let markerTag = markerModel.tags;
+      let markerTag = marker.tags;
       for(let index = 0; index < markerTag.length; index++)
       if(filterData[markerTag[index]] === true){
-        markerModel.showMarker();
+        marker.showMarker();
       }
     });
 
@@ -251,11 +240,45 @@ export class HomePage {
 
   btnClick() {
     let options = {
-      target: this.location,
+      target: this.center,
       zoom: 17
     };
-    this.location = new LatLng(44.937907, -93.168582);
+    this.center = new LatLng(44.937907, -93.168582);
     this.map.moveCamera(options);
+  }
+
+  /** Horizontally centers the marker and offsets the vertical center south by the inputted percentage */
+  panMarker(marker: Marker, centerOffset: number) {
+
+    let pos = marker.getPosition();
+
+    let mapWindow = this.map.getVisibleRegion();
+    let mapHeight = mapWindow.northeast.lat - mapWindow.southwest.lat;
+    let mapCenter = this.map.getCameraTarget();
+
+    let diffy = mapCenter.lat - pos.lat;
+    let diffx = mapCenter.lng - pos.lng;
+
+    let panTarget: ILatLng = {
+      lat: (mapCenter.lat + centerOffset * mapHeight) - diffy,
+      lng:mapCenter.lng - diffx
+    };
+
+    this.map.animateCamera({target: panTarget, duration: 350})
+  }
+
+  removeMarker(name: string) {
+    let ind = this.markers.findIndex(marker => {return marker.title === name});
+    let badMarker = this.markers.splice(ind, 1)[0];
+    console.log(badMarker);
+    badMarker.markerReference.remove();
+  }
+
+  resolveURL(icon) {
+    if(icon["url"]) {
+      icon.url = icon.url.replace("www/", "");
+    }
+
   }
 
 }

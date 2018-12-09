@@ -7,6 +7,7 @@ import { TagController } from "../../assets/models/tag-controller";
 import { SuggestionManagerProvider } from "../../providers/suggestion-manager/suggestion-manager";
 import {SuggestionData } from "../../assets/models/suggestion-data.interface";
 import { Keyboard } from "@ionic-native/keyboard";
+import { Icon } from '../../assets/models/constants'
 
 /**
  * Continuation of the process to submit a user suggestion.
@@ -30,6 +31,7 @@ export class SuggestFormPage {
 
   private markerTitle: string;
   private description: string;
+  private disableSubmit: boolean;
 
   constructor(public navParams: NavParams, public viewCtrl: ViewController, public suggestionManager: SuggestionManagerProvider,
               public keyboard: Keyboard) {
@@ -37,24 +39,21 @@ export class SuggestFormPage {
     this.tagData = new DataMap(this.tags);
     this.markerTitle = navParams.get('markerTitle');
     this.position = this.navParams.get('markerPosition');
+
+    this.disableSubmit = true;
   }
 
 
   ionViewDidLoad() {
+    console.log('SuggestFormPage loaded');
+
     this.typeButtonBaseColor = getComputedStyle(document.getElementById('type-container').children[0],
       null).getPropertyValue('background-color');
-
     this.tags.forEach(tag => {
       let tagElement = document.getElementById(tag);
+      console.log(getComputedStyle(tagElement, null).getPropertyValue("background-color"));
+
       this.tagControllers.push(new TagController(tagElement, tag));
-
-    });
-    console.log('ionViewDidLoad SuggestParamsPage');
-
-    window.addEventListener('click', () => this.validateSubmit());
-    document.getElementById('description-input').addEventListener('keyup', () => {
-      this.updateDescription();
-      this.validateSubmit();
     });
 
     let buttons: HTMLElement = document.getElementById("buttons");
@@ -74,46 +73,31 @@ export class SuggestFormPage {
 
 
   handleTypeSelection(target: HTMLElement) {
+    const button = (<HTMLElement> target.closest('button'));
+    if(!button) return;
+
     const typeButtons: Array<HTMLElement> = (<HTMLElement[]> Array.from(document.getElementById('type-container').children));
-
-
     typeButtons.forEach(button => {
-      button.classList.toggle('selected', false);
 
+      button.classList.toggle('selected', false);
       button.style.backgroundColor = this.typeButtonBaseColor;
+
     });
 
-    let colorChangeTarget: HTMLElement;
-
-    if(target.nodeName === 'BUTTON') {
-      target.classList.toggle('selected');
-      colorChangeTarget = target;
-      console.log(target);
-    }
-
-    else {
-      console.log(target.parentElement);
-      colorChangeTarget = target.parentElement;
-      target.parentElement.classList.toggle('selected')
-    }
-
-    this.selectedType = colorChangeTarget.getAttribute('data-type');
-    colorChangeTarget.style.backgroundColor = new Color(this.typeButtonBaseColor).darken(.4).toString();
+    button.classList.toggle('selected');
+    button.style.backgroundColor = Color(this.typeButtonBaseColor).darken(.4).toString();
+    this.selectedType = button.getAttribute('data-type');
+    this.validateSubmit();
 
   }
 
   handleTagSelection(target: HTMLElement, tag: string) {
 
+    const button = (<HTMLElement> target.closest('button'));
+    if(!button) return;
 
     this.tagData.toggleState(tag);
-
-    if(target.nodeName === 'BUTTON') {
-      target.classList.toggle('selected')
-    }
-    else {
-      target.parentElement.classList.toggle('selected');
-    }
-
+    button.classList.toggle('selected');
     this.colorChange(tag);
 
   }
@@ -130,32 +114,32 @@ export class SuggestFormPage {
 
   }
 
-
-  updateDescription() {
-    console.log('Updating. Curr value: ' + (<HTMLInputElement>document.getElementById('description-input').firstElementChild).value);
-    this.description = (<HTMLInputElement>document.getElementById('description-input').firstElementChild).value;
-  }
-
   /** Arranges suggestion data into an object and adds it to database. */
   submit() {
     alert('Marker title: ' + this.markerTitle + '\n' +
       'Selected type:' + this.selectedType + '\n' +
-      JSON.stringify(this.tagData, null, 2) + '\n' +
-      this.getSelectedTags().toString() + '\n' +
+      // JSON.stringify(this.tagData, null, 2) + '\n' +
+      "Tags: " + this.getSelectedTags().toString() + '\n' +
       "Description: " + this.description + '\n' +
       Date() + '\n' +
+      JSON.stringify(Icon[this.selectedType.toUpperCase()], null, 2) + '\n' +
       this.position.toString());
 
     let suggestionData: SuggestionData = {
-      title: this.markerTitle,
+      name: this.markerTitle,
       description: this.description,
       type: this.selectedType,
       likes: 0,
       tags: Object.assign({}, this.getSelectedTags()),
-      lat: this.position.lat,
-      lng: this.position.lng,
+      position: {
+        lat: this.position.lat,
+        lng: this.position.lng
+      },
+      icon: Icon[this.selectedType.toUpperCase()],
       timestamp: this.getTimestamp()
     };
+
+    console.log(suggestionData.icon);
 
     this.suggestionManager.addSuggestion(suggestionData);
 
@@ -163,12 +147,7 @@ export class SuggestFormPage {
 
   /** Returns true iff a type is selected and a description is inputted */
   private validateSubmit() {
-    if(this.selectedType && this.description) {
-      document.getElementById('submit-button').removeAttribute('disabled');
-    }
-    else {
-      document.getElementById('submit-button').setAttribute('disabled', '');
-    }
+    this.disableSubmit =  ! !!(this.selectedType && this.description);
   }
 
   /** Returns a string representation of the current time in the form YYYY/MM/DD/hh:mm:ss */

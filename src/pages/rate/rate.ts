@@ -1,6 +1,6 @@
 import {Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {SuggestionDataProvider} from "../../providers/suggestion-data/suggestion-data";
+import {PlaceDataProvider} from "../../providers/suggestion-data/suggestion-data";
 import {Observable} from "rxjs-compat";
 import {Suggestion} from "../../assets/models/suggestion.interface";
 
@@ -20,7 +20,7 @@ export class RatePage {
 
   private topSuggestions: Observable<Suggestion[]>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public suggestionData: SuggestionDataProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public suggestionData: PlaceDataProvider) {
   }
 
   ionViewDidLoad() {

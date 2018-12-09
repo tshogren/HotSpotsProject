@@ -57,8 +57,8 @@ export class BoundsChecker {
     this.mapHeight = Math.abs(this.northeast.lat) - Math.abs(this.southeast.lat);
     this.mapWidth = Math.abs(Math.abs(this.northeast.lng) - Math.abs(this.northwest.lng));
 
-    console.log('Map Width: ' + this.mapWidth);
-    console.log(cornerBounds);
+    // console.log('Map Width: ' + this.mapWidth);
+    // console.log(cornerBounds);
 
     let cornersInBounds: Array<string> = [];
     Object.keys(cornerBounds).forEach(corner => {  // for each corner, if corner is in bounds
@@ -67,7 +67,7 @@ export class BoundsChecker {
       }
     });
 
-    console.log(cornersInBounds);
+    // console.log(cornersInBounds);
 
     if(cornersInBounds.length < 4) {
 
@@ -85,8 +85,8 @@ export class BoundsChecker {
       if (cornersInBounds.length === 2) {
         centerOfRedirect = this.redirectAlongBoundary(cornersInBounds);
       }
-      console.log(this.currentCenter);
-      console.log(centerOfRedirect);
+      // console.log(this.currentCenter);
+      // console.log(centerOfRedirect);
 
       this.map.animateCamera({
         target: centerOfRedirect,

@@ -18,7 +18,7 @@ import { AngularFireDatabaseModule, AngularFireDatabase } from "@angular/fire/da
 import { AngularFireAuthModule } from "@angular/fire/auth"
 import {Keyboard} from "@ionic-native/keyboard";
 import { SuggestionManagerProvider } from '../providers/suggestion-manager/suggestion-manager';
-import { SuggestionDataProvider } from '../providers/suggestion-data/suggestion-data';
+import { PlaceDataProvider } from '../providers/suggestion-data/suggestion-data';
 import {IonicStorageModule} from "@ionic/storage";
 
 export const firebaseConfig = {
@@ -64,7 +64,7 @@ export const firebaseConfig = {
     Keyboard,
     SuggestionManagerProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    SuggestionDataProvider
+    PlaceDataProvider
   ]
 })
 export class AppModule {}

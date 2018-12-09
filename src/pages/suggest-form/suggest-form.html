@@ -21,16 +21,23 @@
     <span padding-horizontal>Select Type</span>
   </div>
 
-  <div id="type-container" class="row-container">
-    <button data-type="Landmark" ion-button (click)="handleTypeSelection($event.target)">
+  <div id="type-container" class="row-container" (click)="handleTypeSelection($event.target)">
+    <button data-type="Landmark" ion-button>
       <img src="assets/imgs/landmark.png">
     </button>
-    <button ion-button data-type="Social" (click)="handleTypeSelection($event.target)">
+    <button ion-button data-type="Athletic">
       <img src="assets/imgs/social.png">
     </button>
-    <button ion-button data-type="Place of Interest" (click)="handleTypeSelection($event.target)">
+    <button ion-button data-type="Food">
       <img src="assets/imgs/pin-empty.png">
     </button>
+    <button ion-button data-type="Dorm">
+      <img src="assets/imgs/pin-empty.png">
+    </button>
+    <button ion-button data-type="Place of Interest">
+      <img src="assets/imgs/pin-empty.png">
+    </button>
+
   </div>
 
   <div class="row-container" style="height: 15%;">
@@ -41,21 +48,21 @@
   </div>
 
   <div id="tag-container">
-    <button id={{tag}} ion-button *ngFor="let tag of tags" full (click)="handleTagSelection($event.target, tag)">
+    <button id={{tag}} ion-button *ngFor="let tag of tags" full color={{tag}} (click)="handleTagSelection($event.target, tag)">
       {{tag.toUpperCase()}}
     </button>
   </div>
 
   <ion-item padding-right>
     <ion-label stacked> Description </ion-label>
-    <ion-textarea id="description-input" placeholder="Up to 20 words"></ion-textarea>
+    <ion-textarea id="description-input" [(ngModel)]="description" (input)="validateSubmit()" placeholder="Up to 20 words"></ion-textarea>
   </ion-item>
 
   <div id="buttons" class="row-container" style="height: 15%">
     <button ion-button (click)="close()">
       Cancel
     </button>
-    <button id="submit-button" ion-button disabled (click)="submit()">
+    <button id="submit-button" ion-button [disabled]="disableSubmit" (click)="submit()">
       Submit
     </button>
   </div>

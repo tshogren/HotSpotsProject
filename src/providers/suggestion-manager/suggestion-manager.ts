@@ -18,7 +18,7 @@ export class SuggestionManagerProvider {
   }
 
   addSuggestion(suggestionData: SuggestionData) {
-    this.suggestionsRef.update(suggestionData.title, suggestionData);
+    this.suggestionsRef.update(suggestionData.name, suggestionData);
   }
 
 }
