@@ -1,13 +1,14 @@
-import { Type } from "./constants";
+import {ILatLng} from "@ionic-native/google-maps";
+import { Icon } from "./icon.interface.";
 
 export interface SuggestionData {
-  title: string;
+  name: string;
   description: string;
   type: string;
   tags?: {[key: number]: string};
   likes: 0;
-  lat: number;
-  lng: number;
+  position: ILatLng;
+  icon: Icon;
   timestamp: string
 
 }

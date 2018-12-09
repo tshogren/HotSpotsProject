@@ -1,12 +1,14 @@
 <!-- Generated template for the SuggestionCardComponent component -->
 <ion-card>
   <ion-card-header>
-    {{suggestion.title}}
+    {{suggestion.name}}
   </ion-card-header>
   <ion-card-content>
 
     <div *ngIf="suggestion.tags" class="tag-container">
-      <span *ngFor="let tag of suggestion.tags" class="tag">{{tag.toUpperCase()}}</span>
+      <span *ngFor="let tag of suggestion.tags" [class]="'tag tag-' + tag">
+        {{tag.toUpperCase()}}
+      </span>
     </div>
 
     <ion-grid>
@@ -21,12 +23,15 @@
     </ion-grid>
 
     <ion-item id="likebar">
-      <button id="upvote" ion-button icon-only clear [color]="upvoteColor" item-start>
+      <button id="upvote" ion-button icon-only round clear [color]="upvoteColor" item-start>
         <ion-icon name="md-thumbs-up"></ion-icon>
       </button>
       <span item-start>{{suggestion.likes}}</span>
-      <button id="downvote" ion-button icon-only clear [color]="downvoteColor" item-start>
+      <button id="downvote" ion-button icon-only round clear [color]="downvoteColor" item-start>
         <ion-icon name="md-thumbs-down"></ion-icon>
+      </button>
+      <button id="toggle-add" ion-button icon-only round clear item-start>
+        <ion-icon name="add"></ion-icon>
       </button>
     </ion-item>
 

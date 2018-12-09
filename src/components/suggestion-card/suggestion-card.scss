@@ -71,16 +71,58 @@ suggestion-card {
     padding: 10px 0 10px
   }
 
-  .tag {
-    font-size: 50%;
+  div span {
+    box-sizing: border-box;
+    font-size: 70%;
     grid-column: auto;
     grid-row: auto;
-    padding: 2px 0 2px;
-    background-color: lightblue;
+    padding: 3px 0 2px;
+    color: #FFFFFF;
     border-radius: 2px;
     text-align: center;
+    text-shadow: 0 .3px black;
   }
-}
-suggestion-card {
 
+  .rotateClose {
+    animation: rotateClose 350ms;
+    transform: rotate(45deg);
+  }
+
+  .rotateAdd {
+    animation: rotateAdd 350ms;
+    transform: rotate(0deg);
+  }
+
+  @keyframes rotateClose {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(45deg);
+    }
+  }
+
+  @keyframes rotateAdd {
+    from {
+      transform: rotate(45deg);
+    }
+    to {
+      transform: rotate(0deg);
+    }
+  }
+
+  .handy {
+    animation: move-hand 200ms;
+  }
+
+  @keyframes move-hand {
+
+    0% {transform: rotate(0deg) scale(1)}
+    50% {transform: rotate(-45deg) scale(1.2)}
+    100% {transform: rotate(0deg) scale(1)}
+  }
+
+  #toggle-add {
+    margin-left: 50vw;
+  }
 }

@@ -23,7 +23,7 @@ page-suggest-form {
     grid-column-gap: 10px;
     grid-row-gap: 5px;
     grid-auto-flow: row;
-    padding: 0 5px 0;
+    padding: 0 10px 0;
   }
 
   #description-input {
@@ -35,10 +35,13 @@ page-suggest-form {
   #type-container button {
     height: 100%;
     box-sizing: border-box;
+    padding: 0 5px 0;
   }
 
   #type-container {
+    padding: 0 5px 0;
     height: 20%;
+
   }
 
   img {

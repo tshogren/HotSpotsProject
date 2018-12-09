@@ -16,19 +16,53 @@ export const enum State {
   DOWNVOTE = -1
 }
 
-export class Icon {
-  static readonly ACADEMIC = {
+export namespace Icon {
 
-  };
-  static readonly POI = {
+  const iconWidth = 30;
+  const iconHeight = 38;
 
+  export const ACADEMIC = {
+    'url': 'www/assets/imgs/academic-building.png',
+    'size': {
+      width: iconWidth,
+      height: iconHeight
+    }
   };
-  static readonly LANDMARK = {
 
+  export const POI = {
+    'url': 'www/assets/imgs/pin-empty.png',
+    'size': {
+      width: iconWidth,
+      height: iconHeight
+    }
   };
-  static readonly SOCIAL = {
 
+  export const DORM = {
+    'url': 'www/assets/imgs/dorm.png',
+    'size': {
+      width: iconWidth,
+      height: iconHeight
+    }
   };
+
+  export const LANDMARK = {
+    'url': 'www/assets/imgs/food.png',
+    'size': {
+      width: iconWidth,
+      height: iconHeight,
+    }
+  };
+
+  export const ATHLETIC = {
+    'url': 'www/assets/imgs/athletic.png',
+    'size': {
+      width: iconWidth,
+      height: iconHeight
+    }
+  };
+
 }
 
 export const tags = [];
+
+

@@ -2,7 +2,9 @@ import { Component, Input, OnInit, Renderer2, AfterViewInit, HostListener } from
 import { Suggestion } from "../../assets/models/suggestion.interface";
 import { State } from "../../assets/models/constants";
 import { AngularFireObject } from "@angular/fire/database";
-import { SuggestionDataProvider } from "../../providers/suggestion-data/suggestion-data";
+import { PlaceDataProvider } from "../../providers/suggestion-data/suggestion-data";
+import { User } from "../../assets/models/user";
+import {Place} from "../../assets/models/place.interface";
 
 /**
  * Generated class for the SuggestionCardComponent component.
@@ -21,8 +23,9 @@ export class SuggestionCardComponent implements OnInit, AfterViewInit{
   private upvoteColor: string;
   private downvoteColor: string;
   private suggestionLikes: AngularFireObject<Suggestion>;
+  private isAdded: boolean;
 
-  @Input() suggestion: Suggestion;
+  @Input() suggestion: Place;
   @HostListener('click', ['$event'])
   onClick(event: Event) {
 
@@ -30,22 +33,30 @@ export class SuggestionCardComponent implements OnInit, AfterViewInit{
 
     if (!button) return;
 
+    if (button.id == "upvote" || button.id == "downvote") {
+      this.resolveLikeStatus(button);
+    }
+
+    if (button.id == "toggle-add") {
+      this.toggleAddOrRemove(button);
+    }
     console.log(button);
     console.log(button.id);
-    this.resolveLikeStatus(button);
   }
 
-  constructor(public renderer: Renderer2, private suggestionData: SuggestionDataProvider) {
+  constructor(public renderer: Renderer2, private suggestionData: PlaceDataProvider) {
     console.log('Hello SuggestionCardComponent Component');
 
     this.currentState = this.getCurrentState();
 
     this.upvoteColor = "neutral";
     this.downvoteColor = "neutral";
+
+    this.isAdded = false;
   }
 
   ngOnInit() {
-      this.suggestionLikes = this.suggestionData.getSuggestionLikesRef(this.suggestion.title);
+      this.suggestionLikes = this.suggestionData.getLikes(this.suggestion.name);
   }
 
   ngAfterViewInit() {
@@ -55,6 +66,11 @@ export class SuggestionCardComponent implements OnInit, AfterViewInit{
   private resolveLikeStatus(button: Element) {
 
     let selectedButton: string = button.id;
+
+    button.classList.add('handy');
+    setTimeout(() =>{
+      button.classList.remove('handy');
+    }, 350);
 
     if (this.currentState === State.NEUTRAL) {
       if(selectedButton === "upvote") {
@@ -88,7 +104,9 @@ export class SuggestionCardComponent implements OnInit, AfterViewInit{
     console.log("New State: " + this.newState);
 
     let difference = this.newState - this.currentState;
-    this.suggestionLikes.query.ref.transaction(likes => {
+
+    this.suggestion.likes += difference;                                    // updates number locally
+    this.suggestionLikes.query.ref.transaction(likes => {    // updates number on database
       return likes + difference;
     });
     console.log('Difference: ' + difference);
@@ -116,5 +134,24 @@ export class SuggestionCardComponent implements OnInit, AfterViewInit{
 
   private getCurrentState() {
     return State.NEUTRAL
+  }
+
+  private toggleAddOrRemove(button: Element) {
+    if (this.isAdded) {
+      button.classList.remove('rotateClose');
+      button.classList.add('rotateAdd');
+      User.removePlace(this.suggestion.name);
+      console.log("Added places, removing " + this.suggestion.name + " :");
+      console.log(User.getAddedPlaces());
+    }
+    else if (!this.isAdded){
+      button.classList.remove('rotateAdd');
+      button.classList.add('rotateClose');
+      User.addPlace(this.suggestion);
+      console.log("Added places, adding " + this.suggestion.name + " :");
+      console.log(User.getAddedPlaces());
+    }
+
+    this.isAdded = !this.isAdded
   }
 }

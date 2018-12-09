@@ -15,7 +15,6 @@ export class LikeManager {
 
     this.frame = frame;
     this.markerTitle = this.frame.querySelector('#title').textContent;
-    console.log(this.markerTitle);
     this.isLiked = this.getLikeStatus();
 
     this.setInitialCondition();
@@ -25,7 +24,7 @@ export class LikeManager {
       frame.querySelector('#num-likes').textContent = data.likes;
     });
 
-    this.frame.querySelector('#like-button').addEventListener('click', event => this.handleLike());
+    this.frame.querySelector('#like-button').addEventListener('click', () => this.handleLike());
 
     this.markerLikesPath = afDB.object('/markerLikes/' + this.markerTitle +'/likes');
   }
