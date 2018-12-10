@@ -48,7 +48,7 @@ const types = {
   LIBRARY: 'Library',
   DINING: 'Dining',
   DORM: 'Dorm',
-  ATHLETIC: 'Athletic',
+  ATHLETICS: 'Athletics',
   LANDMARK: 'Landmark',
   OTHER: 'Other'
 };
@@ -70,7 +70,7 @@ export const markersDataArray = [
     },
     description: 'Students call this the \'LC.\' Students come here to work out, socialize, nap, and eat at Scotty\'s, a dining option that serves burritos. Health and Wellness is also located here.',
     icon: 'red',
-    type: types.ATHLETIC
+    type: types.ATHLETICS
   },
   { name: 'Neill Hall',
     position: {
