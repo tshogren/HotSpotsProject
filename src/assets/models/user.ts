@@ -8,17 +8,13 @@ export namespace User {
   let likedPlaces: string[] = [];
   let downvotedPlaces: string[] = [];
   let addedPlaces: Place[] = [];
+  let visitedPages: string[];
 
   let lastAddedPlace: Subject<Place> = new Subject<Place>();
   let lastAddedPlace$: Observable<Place> = lastAddedPlace.asObservable();
   let lastRemovedPlace: Subject<string> = new Subject<string>();
   let lastRemovedPlace$: Observable<string> = lastRemovedPlace.asObservable();
 
-  const newUser: UserData = {
-    likedPlaces: [],
-    downvotedPlaces: [],
-    addedPlaces: []
-  }
 
   export function initialize(userData: UserData) {
     if (initialized) throw new Error("User is already initialized");
@@ -26,6 +22,7 @@ export namespace User {
     likedPlaces = userData.likedPlaces;
     downvotedPlaces = userData.downvotedPlaces;
     addedPlaces = userData.addedPlaces;
+    visitedPages = userData.visitedPages
   }
 
   export function addPlace(place: any) {
@@ -62,14 +59,23 @@ export namespace User {
     return lastRemovedPlace$
   }
 
+  export function addVisitedPage(pageName: string) {
+    visitedPages.push(pageName);
+  }
+
   export async function bundleUserData() {
     let userData: UserData = {
       likedPlaces: likedPlaces,
       downvotedPlaces: downvotedPlaces,
-      addedPlaces: addedPlaces
+      addedPlaces: addedPlaces,
+      visitedPages: visitedPages
     };
 
     return Promise.resolve(userData)
+  }
+
+  export function hasVisited(pageName: string) {
+    return visitedPages.some(page => {return page === pageName});
   }
 
   export function hasLiked(placeName) {
