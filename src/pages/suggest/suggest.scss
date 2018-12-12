@@ -1,5 +1,10 @@
 page-suggest {
 
+.row-container {
+  //background-color: lightblue;
+}
+
+
   #next-button {
     width: 80%;
   }
@@ -14,10 +19,6 @@ page-suggest {
     width: $circle-size;
 
   }
-
-  //.hide {
-  //  display: none;
-  //}
 
   .step-text {
     color: black !important;

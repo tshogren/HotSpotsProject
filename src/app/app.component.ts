@@ -25,26 +25,20 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
-      // this.storage.get('introShown').then((result) => {
-      //
-      //   if (result) {
-      //     this.rootPage = TabsPage;
-      //   } else {
-      //     this.rootPage = 'Intro';
-      //     this.storage.set('introShown', true);
-      //   }
-      //
-      //   this.loader.dismiss();
-      //
-      // });
+
 
       this.setup().then(() => console.log("User initialized"));
+
+      platform.pause.subscribe(() => {
+        console.log("App paused");
+        let userData: UserData = User.bundleUserData();
+        storage.set('userData', userData);
+      })
     });
   }
 
   async setup() {
-    await this.storage.remove('userData');
-    // const defaultSuggestions = await this.placeData.getDefaultSuggestions().toPromise();
+    // await this.storage.remove('userData');
 
     let userData = await this.storage.get('userData');
 

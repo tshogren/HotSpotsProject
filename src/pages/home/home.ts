@@ -155,7 +155,7 @@ export class HomePage {
     const likeManager = new LikeManager(this.afDB, frame);
 
 
-    htmlInfoWindow.setContent(frame, {width: '250px', height: '250px'});
+    htmlInfoWindow.setContent(frame, {width: '250px', maxHeight: '250px'});
     // htmlInfoWindow.setBackgroundColor('');
 
     let markerOptions = {

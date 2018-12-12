@@ -1,11 +1,11 @@
-import { Component, Input, OnInit, Renderer2, AfterViewInit, HostListener } from '@angular/core';
-import { Suggestion } from "../../assets/models/suggestion.interface";
-import { State } from "../../assets/models/constants";
-import { AngularFireObject } from "@angular/fire/database";
-import { PlaceDataProvider } from "../../providers/suggestion-data/suggestion-data";
-import { User } from "../../assets/models/user";
+import {AfterViewInit, Component, ElementRef, HostListener, Input, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {Suggestion} from "../../assets/models/suggestion.interface";
+import {State} from "../../assets/models/constants";
+import {AngularFireObject} from "@angular/fire/database";
+import {PlaceDataProvider} from "../../providers/suggestion-data/suggestion-data";
+import {User} from "../../assets/models/user";
 import {Place} from "../../assets/models/place.interface";
-
+import * as _ from 'underscore'
 /**
  * Generated class for the SuggestionCardComponent component.
  *
@@ -24,8 +24,10 @@ export class SuggestionCardComponent implements OnInit, AfterViewInit{
   private downvoteColor: string;
   private suggestionLikes: AngularFireObject<Suggestion>;
   private isAdded: boolean;
+  private toggleAdd_throttled: Function;
 
   @Input() suggestion: Place;
+  @ViewChild('toggleAdd', {read: ElementRef}) addToggle: ElementRef;
   @HostListener('click', ['$event'])
   onClick(event: Event) {
 
@@ -38,7 +40,7 @@ export class SuggestionCardComponent implements OnInit, AfterViewInit{
     }
 
     if (button.id == "toggle-add") {
-      this.toggleAddOrRemove(button);
+      this.toggleAdd_throttled(button);
     }
     console.log(button);
     console.log(button.id);
@@ -47,20 +49,25 @@ export class SuggestionCardComponent implements OnInit, AfterViewInit{
   constructor(public renderer: Renderer2, private suggestionData: PlaceDataProvider) {
     console.log('Hello SuggestionCardComponent Component');
 
-    this.currentState = this.getCurrentState();
-
+    // this.currentState = this.initializeState();
     this.upvoteColor = "neutral";
     this.downvoteColor = "neutral";
-
-    this.isAdded = false;
+    this.toggleAdd_throttled = _.throttle(button => this.toggleAddOrRemove(button), 1000, {trailing: false});
+    // this.isAdded = false;
   }
 
   ngOnInit() {
+      this.initializeState();
+      this.isAdded = User.hasAdded(this.suggestion.name);
+    if(this.isAdded) {
+      this.renderer.setStyle(this.addToggle.nativeElement, 'transform', 'rotate(45deg)');
+    }
+
       this.suggestionLikes = this.suggestionData.getLikes(this.suggestion.name);
   }
 
   ngAfterViewInit() {
-
+    // console.log(this.addToggle.nativeElement)
   }
 
   private resolveLikeStatus(button: Element) {
@@ -117,23 +124,36 @@ export class SuggestionCardComponent implements OnInit, AfterViewInit{
   private makeUpvote() {
     this.upvoteColor = "upvote";
     this.downvoteColor = "neutral";
-    this.newState = State.UPVOTE
+    this.newState = State.UPVOTE;
+    User.addLikedPlace(this.suggestion.name);
   }
 
   private makeDownvote() {
     this.upvoteColor = "neutral";
     this.downvoteColor = "downvote";
-    this.newState = State.DOWNVOTE
+    this.newState = State.DOWNVOTE;
+    User.addDownvotedPlace(this.suggestion.name);
   }
 
   private makeNeutral() {
     this.upvoteColor = "neutral";
     this.downvoteColor = "neutral";
     this.newState = State.NEUTRAL;
+    User.resetLikeStatus(this.suggestion.name);
   }
 
-  private getCurrentState() {
-    return State.NEUTRAL
+  private initializeState() {
+    if (User.hasLiked(this.suggestion.name)) {
+      this.currentState = State.UPVOTE;
+      this.upvoteColor = "upvote"
+    }
+    else if (User.hasDownvoted(this.suggestion.name)) {
+      this.currentState = State.DOWNVOTE;
+      this.downvoteColor = "downvote";
+    }
+    else {
+      this.currentState = State.NEUTRAL;
+    }
   }
 
   private toggleAddOrRemove(button: Element) {

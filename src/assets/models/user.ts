@@ -38,8 +38,8 @@ export namespace User {
   }
 
   export function addLikedPlace(placeName: string) {
-    downvotedPlaces = downvotedPlaces.filter(suggestion => {
-      return suggestion !== placeName;
+    downvotedPlaces = downvotedPlaces.filter(place => {
+      return place !== placeName;
     });
     likedPlaces.push(placeName);
   }
@@ -49,6 +49,11 @@ export namespace User {
       return place !== placeName;
     });
     downvotedPlaces.push(placeName);
+  }
+
+  export function resetLikeStatus(placeName: string) {
+    downvotedPlaces = downvotedPlaces.filter(place => {return place !== placeName});
+    likedPlaces = likedPlaces.filter(place => {return place !== placeName});
   }
 
   export function getAddedPlace() {
@@ -63,7 +68,7 @@ export namespace User {
     visitedPages.push(pageName);
   }
 
-  export async function bundleUserData() {
+  export function bundleUserData() {
     let userData: UserData = {
       likedPlaces: likedPlaces,
       downvotedPlaces: downvotedPlaces,
@@ -71,7 +76,7 @@ export namespace User {
       visitedPages: visitedPages
     };
 
-    return Promise.resolve(userData)
+    return userData;
   }
 
   export function hasVisited(pageName: string) {

@@ -1,5 +1,6 @@
 import { AngularFireObject, AngularFireDatabase } from "@angular/fire/database"
 import { Observable } from "rxjs";
+import { User } from "./user";
 
 /** Syncs marker likes to and from database. */
 export class LikeManager {
@@ -57,11 +58,13 @@ export class LikeManager {
       heartClassList.toggle('liked', false);
       heartClassList.toggle('not-liked', true);
       this.decrementLike();
+      User.resetLikeStatus(this.markerTitle);
     }
     else if(this.isLiked === false) {
       heartClassList.toggle('not-liked', false);
       heartClassList.toggle('liked', true);
       this.incrementLike();
+      User.addLikedPlace(this.markerTitle);
     }
     else {
       console.log('Something unaccounted for.')
@@ -82,7 +85,7 @@ export class LikeManager {
   }
 
   private getLikeStatus() {
-    return false;
+    return User.hasLiked(this.markerTitle);
   }
 }
 

@@ -53,7 +53,7 @@ export namespace Icon {
     }
   };
 
-  export const ATHLETIC = {
+  export const ATHLETICS = {
     'url': 'www/assets/imgs/athletic.png',
     'size': {
       width: iconWidth,

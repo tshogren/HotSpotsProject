@@ -88,6 +88,10 @@ $colors: (
   grey: (
     base: transparent,
     contrast: grey
+  ),
+  slick: (
+    base: #000000,
+    contrast: #FFFFFF
   )
 );
 
@@ -105,7 +109,10 @@ $popover-ios-width: 250px;
 // --------------------------------------------------
 // Material Design only Sass variables can go here
 $popover-md-width: 250px;
-
+//$tabs-md-background: #000000;
+//$tabs-md-tab-text-color: #FFFFFF;
+//$tabs-md-tab-icon-color: #FFFFFF;
+//$tabs-md-tab-color-active: #CC5500;
 
 
 
