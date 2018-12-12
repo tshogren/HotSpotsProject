@@ -90,7 +90,7 @@ suggestion-card {
 
   .rotateAdd {
     animation: rotateAdd 350ms;
-    transform: rotate(0deg);
+    transform: rotate(0deg) !important;
   }
 
   @keyframes rotateClose {

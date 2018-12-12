@@ -9,6 +9,18 @@ page-suggest {
     width: 80%;
   }
 
+  .md {
+    .fix{
+      height: 15%
+    }
+  }
+
+  .ios {
+    .fix {
+      height: 25%
+    }
+  }
+
   $circle-size: 30px;
 
   .step {

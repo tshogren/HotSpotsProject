@@ -41,6 +41,15 @@ export class SuggestPage {
 
   ionViewDidLoad() {
     console.log('SuggestPage loaded');
+    const scrollCont: Element = document.getElementsByClassName('scroll-content')[0];
+    const content: HTMLElement = document.getElementById('content');
+    console.log(scrollCont);
+    console.log(getComputedStyle(scrollCont, null).marginTop);
+    console.log("Scroll height: " + scrollCont.clientHeight.toString());
+    console.log(content);
+    // document.getElementById('content').style.height = scrollCont.clientHeight.toString() + "px";
+    content.style.height = scrollCont.clientHeight.toString() + "px";
+    content.style.width = '100%';
 
     this.keyboard.onKeyboardWillShow().subscribe(() => {
       this.renderer.addClass(document.getElementById('next-button'), 'hide');

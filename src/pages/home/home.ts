@@ -100,9 +100,14 @@ export class HomePage {
           this.addMarker(markerData);
         })
 
-      })
+      });
+
+
+      console.log(document);
+
     });
 
+    // responses to user added and removed hotspots
     this.addedMarker$.subscribe(marker => {
       console.log(marker);
       this.addMarker(marker, GoogleMapsAnimation.BOUNCE);
@@ -175,6 +180,7 @@ export class HomePage {
           htmlInfoWindow.open(marker);
           this.panMarker(marker, .25);
         });
+
       });
   }
 
@@ -268,10 +274,16 @@ export class HomePage {
   }
 
   removeMarker(name: string) {
-    let ind = this.markers.findIndex(marker => {return marker.title === name});
-    let badMarker = this.markers.splice(ind, 1)[0];
+    // let ind = this.markers.findIndex(marker => {return marker.title === name});
+    let badMarker = this.markers.find(marker => {return marker.title === name});
     console.log(badMarker);
-    badMarker.markerReference.remove();
+    if(badMarker) {
+      badMarker.markerReference.remove();
+      this.markers = this.markers.filter(marker => {return marker.title !== name});
+    }
+    if(badMarker === undefined) { // give some time for marker to be pushed onto the markers array
+      setTimeout(() => this.removeMarker(name), 1000)
+    }
   }
 
   resolveURL(icon) {
