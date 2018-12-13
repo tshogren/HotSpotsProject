@@ -48,8 +48,10 @@ export class SuggestPage {
     console.log("Scroll height: " + scrollCont.clientHeight.toString());
     console.log(content);
     // document.getElementById('content').style.height = scrollCont.clientHeight.toString() + "px";
-    content.style.height = scrollCont.clientHeight.toString() + "px";
+    content.style.height = 'calc(100vh - ' + getComputedStyle(scrollCont, null).marginTop + " - " +
+      getComputedStyle(scrollCont, null).marginBottom + ')';
     content.style.width = '100%';
+    content.style.boxSizing = 'border-box';
 
     this.keyboard.onKeyboardWillShow().subscribe(() => {
       this.renderer.addClass(document.getElementById('next-button'), 'hide');

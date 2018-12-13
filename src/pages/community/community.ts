@@ -5,7 +5,7 @@ import {Observable} from "rxjs-compat";
 import {Suggestion} from "../../assets/models/suggestion.interface";
 
 /**
- * Generated class for the RatePage page.
+ * Generated class for the CommunityPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -13,10 +13,10 @@ import {Suggestion} from "../../assets/models/suggestion.interface";
 
 @IonicPage()
 @Component({
-  selector: 'page-rate',
-  templateUrl: 'rate.html',
+  selector: 'page-community',
+  templateUrl: 'community.html',
 })
-export class RatePage {
+export class CommunityPage {
 
   private topSuggestions: Observable<Suggestion[]>;
 
@@ -24,7 +24,7 @@ export class RatePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RatePage');
+    console.log('ionViewDidLoad CommunityPage');
   }
 
   ionViewWillEnter() {
