@@ -4,17 +4,19 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>Rate</ion-title>
-  </ion-navbar>
-
-</ion-header>
+<!--<ion-header>-->
+<!---->
+  <!--<ion-navbar>-->
+    <!--<ion-title>Rate</ion-title>-->
+  <!--</ion-navbar>-->
+<!---->
+<!--</ion-header>-->
 
 
 <ion-content padding-horizontal>
-
+  <ion-refresher (ionRefresh)="refreshTop($event)">
+    <ion-refresher-content pullingIcon="sync"></ion-refresher-content>
+  </ion-refresher>
   <suggestion-card *ngFor="let suggestion of topSuggestions | async | reverse" [suggestion]="suggestion"></suggestion-card>
 
 </ion-content>

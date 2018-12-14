@@ -8,12 +8,15 @@ import { iOSMap, androidMap } from "../home/map-style";
 import { BoundsChecker } from "../../assets/models/bounds-checker";
 import {UtilitiesProvider} from "../../providers/utilities/utilities";
 import {Toast} from "@ionic-native/toast";
+import {User} from "../../assets/models/user";
 
 @Component({
   selector: 'page-suggest',
   templateUrl: 'suggest.html'
 })
 export class SuggestPage {
+
+  /** Allows a user to suggest a HotSpot */
 
   @ViewChild('map')
 
@@ -42,7 +45,12 @@ export class SuggestPage {
   }
 
   ionViewDidLoad() {
-    console.log('SuggestPage loaded');
+
+    if (!User.hasVisited('suggest')) {
+      this.presentInfo();
+      User.addVisitedPage('suggest');
+    }
+
     // hardcoding the visible region size to resolve layout differences in Android/iOS
     const scrollCont: Element = document.getElementsByClassName('scroll-content')[0];
     const content: HTMLElement = document.getElementById('content');
@@ -99,7 +107,7 @@ export class SuggestPage {
             },
           };
 
-          this.util.resolveURL(markerOptions.icon);
+          if (this.platform.is('android')) this.util.resolveURL(markerOptions.icon);
 
           this.suggestedMarker = this.map.addMarkerSync(markerOptions);
 
@@ -129,14 +137,16 @@ export class SuggestPage {
     setTimeout(() => {
       this.markerTitle = "";
       this.suggestedMarker.remove();
+      this.suggestedMarker = null;
+      this.validate();
     }, 750);
 
   }
 
   presentInfo() {
     const info = this.alertCtrl.create({
-      subTitle: 'Long press on the map to place a suggested HotSpot and follow the on screen prompts to submit it.' +
-        ' Note that suggested HotSpots are visible to all users.',
+      subTitle: 'Long press on the map to place a suggestion and follow the on screen prompts to submit it.' +
+        ' Note that suggested HotSpots will be visible to all users.',
       buttons:['Got it!']
     });
 

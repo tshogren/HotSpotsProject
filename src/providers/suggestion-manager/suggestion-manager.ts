@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireObject, AngularFireList } from '@angular/fire/database'
 import {SuggestionData} from "../../assets/models/suggestion-data.interface";
 
-/*
+/**
   Adds valid suggestions to database.
 */
 

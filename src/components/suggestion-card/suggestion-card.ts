@@ -1,4 +1,5 @@
-import {AfterViewInit, Component, ElementRef, HostListener, Input, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {Component, ElementRef, HostListener, Input, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {ToastController} from "ionic-angular";
 import {Suggestion} from "../../assets/models/suggestion.interface";
 import {State} from "../../assets/models/constants";
 import {AngularFireObject} from "@angular/fire/database";
@@ -7,16 +8,14 @@ import {User} from "../../assets/models/user";
 import {Place} from "../../assets/models/place.interface";
 import * as _ from 'underscore'
 /**
- * Generated class for the SuggestionCardComponent component.
+ * Displays information about a suggested HotSpot.
  *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
  */
 @Component({
   selector: 'suggestion-card',
   templateUrl: 'suggestion-card.html'
 })
-export class SuggestionCardComponent implements OnInit, AfterViewInit{
+export class SuggestionCardComponent implements OnInit {
 
   private currentState: State;
   private newState: State;
@@ -43,18 +42,15 @@ export class SuggestionCardComponent implements OnInit, AfterViewInit{
     if (button.id == "toggle-add") {
       this.toggleAdd_throttled(button);
     }
-    console.log(button);
-    console.log(button.id);
   }
 
-  constructor(public renderer: Renderer2, private suggestionData: PlaceDataProvider) {
+  constructor(public renderer: Renderer2, private suggestionData: PlaceDataProvider, private toaster: ToastController) {
     console.log('Hello SuggestionCardComponent Component');
 
     // this.currentState = this.initializeState();
     this.upvoteColor = "neutral";
     this.downvoteColor = "neutral";
     this.toggleAdd_throttled = _.throttle(button => this.toggleAddOrRemove(button), 1000, {trailing: false});
-    // this.isAdded = false;
   }
 
   ngOnInit() {
@@ -68,9 +64,6 @@ export class SuggestionCardComponent implements OnInit, AfterViewInit{
     this.suggestionLikes = this.suggestionData.getLikes(this.suggestion.name);
   }
 
-  ngAfterViewInit() {
-    // console.log(this.addToggle.nativeElement)
-  }
 
   private resolveLikeStatus(button: Element) {
 
@@ -108,17 +101,12 @@ export class SuggestionCardComponent implements OnInit, AfterViewInit{
       }
     }
 
-    console.log("Selected button: " + selectedButton);
-    console.log("Current state: " + this.currentState);
-    console.log("New State: " + this.newState);
-
     let difference = this.newState - this.currentState;
 
     this.suggestion.likes += difference;                                    // updates number locally
     this.suggestionLikes.query.ref.transaction(likes => {    // updates number on database
       return likes + difference;
     });
-    console.log('Difference: ' + difference);
 
     this.currentState = this.newState;
   }
@@ -163,17 +151,29 @@ export class SuggestionCardComponent implements OnInit, AfterViewInit{
       button.classList.remove('rotateClose');
       button.classList.add('rotateAdd');
       User.removePlace(this.suggestion.name);
-      console.log("Added places, removing " + this.suggestion.name + " :");
-      console.log(User.getAddedPlaces());
+      this.displayMessage(this.suggestion.name + " removed from your map.");
+      // console.log("Added places, removing " + this.suggestion.name + " :");
+      // console.log(User.getAddedPlaces());
     }
     else if (!this.isAdded){
       button.classList.remove('rotateAdd');
       button.classList.add('rotateClose');
       User.addPlace(this.suggestion);
-      console.log("Added places, adding " + this.suggestion.name + " :");
-      console.log(User.getAddedPlaces());
+      this.displayMessage(this.suggestion.name + " added to your map.");
+      // console.log("Added places, adding " + this.suggestion.name + " :");
+      // console.log(User.getAddedPlaces());
     }
 
     this.isAdded = !this.isAdded
+  }
+
+  displayMessage(message: string) {             // Native Toast not showing when called from inside component :(
+    const butteredToast = this.toaster.create({
+      message: message,
+      duration: 1750,
+      position: 'bottom',
+    });
+
+    butteredToast.present();
   }
 }
