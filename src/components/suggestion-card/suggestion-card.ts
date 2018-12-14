@@ -28,6 +28,7 @@ export class SuggestionCardComponent implements OnInit, AfterViewInit{
 
   @Input() suggestion: Place;
   @ViewChild('toggleAdd', {read: ElementRef}) addToggle: ElementRef;
+  @ViewChild('icon') iconImg: ElementRef;
   @HostListener('click', ['$event'])
   onClick(event: Event) {
 
@@ -57,13 +58,14 @@ export class SuggestionCardComponent implements OnInit, AfterViewInit{
   }
 
   ngOnInit() {
-      this.initializeState();
-      this.isAdded = User.hasAdded(this.suggestion.name);
+    this.initializeState();
+    this.isAdded = User.hasAdded(this.suggestion.name);
     if(this.isAdded) {
       this.renderer.setStyle(this.addToggle.nativeElement, 'transform', 'rotate(45deg)');
     }
+    this.renderer.setAttribute(this.iconImg.nativeElement, 'src', this.suggestion.icon.url.substring(3));
 
-      this.suggestionLikes = this.suggestionData.getLikes(this.suggestion.name);
+    this.suggestionLikes = this.suggestionData.getLikes(this.suggestion.name);
   }
 
   ngAfterViewInit() {

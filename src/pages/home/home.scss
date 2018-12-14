@@ -18,6 +18,7 @@ page-home {
       position: relative;
       top: -21px;
       left: -5px;
+    margin-bottom: 0;
     }
 
   .liked {
@@ -31,6 +32,7 @@ page-home {
     justify-content: center;
     align-items: center;
   }
+
 
   .num-likes {
     font-size: 125%;
@@ -92,5 +94,22 @@ page-home {
 
   @keyframes rotate {
     from {transform: rotate(0deg) scale(1)} to {transform: rotate(360deg) scale(1.15)}
+  }
+
+  #remove {
+    background-color: transparent;
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+  }
+
+  #cross {
+    //display: flex;
+    //justify-content: center;
+    //align-items: center;
+    content: url(../../assets/icon/close.svg);
+    height: 15px;
+    width: 15px;
+
   }
 }

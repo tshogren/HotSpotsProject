@@ -5,7 +5,7 @@ import {Observable} from "rxjs-compat";
 import {Suggestion} from "../../assets/models/suggestion.interface";
 
 /**
- * Generated class for the CommunityPage page.
+ * Generated class for the CommunityTopPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -13,10 +13,10 @@ import {Suggestion} from "../../assets/models/suggestion.interface";
 
 @IonicPage()
 @Component({
-  selector: 'page-community',
-  templateUrl: 'community.html',
+  selector: 'page-community-top',
+  templateUrl: 'community-top.html',
 })
-export class CommunityPage {
+export class CommunityTopPage {
 
   private topSuggestions: Observable<Suggestion[]>;
 
@@ -24,7 +24,7 @@ export class CommunityPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CommunityPage');
+    console.log('ionViewDidLoad CommunityTopPage');
   }
 
   ionViewWillEnter() {

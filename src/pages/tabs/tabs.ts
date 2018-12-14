@@ -16,7 +16,7 @@ export class TabsPage {
   mb: any;
   tab1Root = HomePage;
   tab2Root = SuggestPage;
-  tab3Root = 'CommunityPage';
+  tab3Root = 'CommunityTopPage';
   tab4Root = ContactPage;
 
   constructor(private elementRef: ElementRef, private renderer: Renderer2, private event: Events ) {

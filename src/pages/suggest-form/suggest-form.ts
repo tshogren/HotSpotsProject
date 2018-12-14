@@ -8,6 +8,7 @@ import { SuggestionManagerProvider } from "../../providers/suggestion-manager/su
 import {SuggestionData } from "../../assets/models/suggestion-data.interface";
 import { Keyboard } from "@ionic-native/keyboard";
 import { Icon } from '../../assets/models/constants'
+import {UtilitiesProvider} from "../../providers/utilities/utilities";
 
 /**
  * Continuation of the process to submit a user suggestion.
@@ -34,7 +35,7 @@ export class SuggestFormPage {
   private disableSubmit: boolean;
 
   constructor(public navParams: NavParams, public viewCtrl: ViewController, public suggestionManager: SuggestionManagerProvider,
-              public keyboard: Keyboard) {
+              public keyboard: Keyboard, public util: UtilitiesProvider) {
     this.tagControllers = [];
     this.tagData = new DataMap(this.tags);
     this.markerTitle = navParams.get('markerTitle');
@@ -45,7 +46,14 @@ export class SuggestFormPage {
 
 
   ionViewDidLoad() {
-    console.log('SuggestFormPage loaded');
+
+    // hardcoding the visible region size to resolve layout differences in Android/iOS
+    const scrollCont: Element = document.getElementsByClassName('scroll-content')[0];
+    const content: HTMLElement = document.getElementById('content-form');
+    content.style.height = 'calc(100vh - ' + getComputedStyle(scrollCont, null).marginTop + " - " +
+      getComputedStyle(scrollCont, null).marginBottom + ')';
+    content.style.width = '100%';
+    content.style.boxSizing = 'border-box';
 
     this.typeButtonBaseColor = getComputedStyle(document.getElementById('type-container').children[0],
       null).getPropertyValue('background-color');
@@ -106,7 +114,7 @@ export class SuggestFormPage {
     let tagCtrl: TagController = this.tagControllers.find(tagObject => {return tagObject.getName() === tag});
 
     if(this.tagData.isSelected(tag)) {
-      tagCtrl.darken()
+      tagCtrl.lighten()
     }
     else {
       tagCtrl.removeColorChange();
@@ -116,14 +124,6 @@ export class SuggestFormPage {
 
   /** Arranges suggestion data into an object and adds it to database. */
   submit() {
-    alert('Marker title: ' + this.markerTitle + '\n' +
-      'Selected type:' + this.selectedType + '\n' +
-      // JSON.stringify(this.tagData, null, 2) + '\n' +
-      "Tags: " + this.getSelectedTags().toString() + '\n' +
-      "Description: " + this.description + '\n' +
-      Date() + '\n' +
-      JSON.stringify(Icon[this.selectedType.toUpperCase()], null, 2) + '\n' +
-      this.position.toString());
 
     let suggestionData: SuggestionData = {
       name: this.markerTitle,
@@ -136,33 +136,20 @@ export class SuggestFormPage {
         lng: this.position.lng
       },
       icon: Icon[this.selectedType.toUpperCase()],
-      timestamp: this.getTimestamp()
+      timestamp: this.util.getTimestamp()
     };
 
     console.log(suggestionData.icon);
 
     this.suggestionManager.addSuggestion(suggestionData);
 
+    setTimeout(() => {this.close()}, 750)
+
   }
 
   /** Returns true iff a type is selected and a description is inputted */
   private validateSubmit() {
     this.disableSubmit =  ! !!(this.selectedType && this.description);
-  }
-
-  /** Returns a string representation of the current time in the form YYYY/MM/DD/hh:mm:ss */
-  private getTimestamp() {
-
-    const date = new Date();
-
-    return date.getFullYear().toString() + this.formatDate(date.getMonth().toString()) + this.formatDate(date.getDate().toString()) +
-      this.formatDate(date.getHours().toString()) + this.formatDate(date.getMinutes().toString()) +
-      this.formatDate(date.getSeconds().toString());
-  }
-
-  private formatDate(dateFunction: string) {
-
-    return (dateFunction.length < 2) ? "0" + dateFunction : dateFunction
   }
 
   private getSelectedTags() {

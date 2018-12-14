@@ -24,6 +24,9 @@ import { AngularFireDatabase } from "@angular/fire/database";
 import { User } from "../../assets/models/user";
 import {Observable} from "rxjs";
 import {Place} from "../../assets/models/place.interface";
+import {PlaceDataProvider} from "../../providers/suggestion-data/suggestion-data";
+import {UtilitiesProvider} from "../../providers/utilities/utilities";
+import {Toast} from "@ionic-native/toast";
 
 @Component({
   selector: 'page-home',
@@ -48,8 +51,10 @@ export class HomePage {
   constructor(private platform: Platform,
               public popoverCtrl: PopoverController,
               public events: Events,
-              public toaster: ToastController,
-              public afDB: AngularFireDatabase) {
+              public toaster: Toast,
+              public afDB: AngularFireDatabase,
+              public placeData: PlaceDataProvider,
+              public util: UtilitiesProvider) {
 
     this.center = new LatLng(44.937907, -93.168582);
     this.filterHelper = new FilterHelper();
@@ -67,6 +72,7 @@ export class HomePage {
 
     this.addedMarker$ = User.getAddedPlace();
     this.removedMarker$ = User.getRemovedPlace();
+
   }
 
   /** Loads map after page is ready and attaches event listeners. */
@@ -116,8 +122,13 @@ export class HomePage {
     this.removedMarker$.subscribe(name => {
       console.log(name);
       this.removeMarker(name);
-
     });
+
+    // subscribe to newly suggested places
+    const lastTimeActive: string = User.getLastTimeActive();
+    this.placeData.getNewSuggestions(lastTimeActive).on("child_added", placeSnap => {
+      User.addPlace(placeSnap.val());
+    })
   }
 
   addMarker(markerData, animation = null) {
@@ -129,7 +140,7 @@ export class HomePage {
     // this.afDB.list('/markerLikes').update(name, {likes: 0});
     console.log(icon);
     console.log(icon["url"]);
-    if (this.platform.is("android")) this.resolveURL(icon);
+    if (this.platform.is("android")) this.util.resolveURL(icon);
 
     let htmlInfoWindow = new HtmlInfoWindow();
     let frame = document.createElement('div');
@@ -140,9 +151,12 @@ export class HomePage {
       `<div id="tag-container"></div>`,
       `<p class="description">${description}</p>`,
       `<div class="row-container">`,
+        //`<div style="height: 30px; width: 70px; display: flex; align-items: center">`,
         `<button id="like-button"><span id="heart" class="like-button"></span></button>`,
         `<span id="num-likes" class="row-item num-likes"></span>`,
-      `</div>`
+        //`</div>`,
+      `</div>`,
+      `<button id="remove"><span id="cross"></span></button>`
     ].join('');
 
     // adding tags to markers
@@ -157,7 +171,9 @@ export class HomePage {
       });
     }
 
-    const likeManager = new LikeManager(this.afDB, frame);
+    frame.querySelector('#remove').addEventListener('click', () => User.removePlace(name));
+
+    const likeManager = new LikeManager(this.afDB, this.placeData, frame);
 
 
     htmlInfoWindow.setContent(frame, {width: '250px', maxHeight: '250px'});
@@ -212,13 +228,7 @@ export class HomePage {
 
     this.markers.forEach(marker => {
 
-      console.log('Marker Model:');
-      console.log(marker);
-      console.log('Marker type' + marker.type);
-      console.log('Checky: ' + marker.type + ', ' + filterData[marker.type]);
-
       let markerType = marker.type;
-      console.log('Checky 2: ' + markerType + ', ' + filterData[markerType]);
 
       if(filterData[markerType] !== undefined) { // Only doing this now to account for some markers not having a type
 
@@ -286,11 +296,11 @@ export class HomePage {
     }
   }
 
-  resolveURL(icon) {
-    if(icon["url"]) {
-      icon.url = icon.url.replace("www/", "");
-    }
+  // resolveURL(icon) {
+  //   if(icon["url"]) {
+  //     icon.url = icon.url.replace("www/", "");
+  //   }
 
-  }
+  // }
 
 }

@@ -1,6 +1,8 @@
 import { AngularFireObject, AngularFireDatabase } from "@angular/fire/database"
 import { Observable } from "rxjs";
 import { User } from "./user";
+import {PlaceDataProvider} from "../../providers/suggestion-data/suggestion-data";
+import {Place} from "./place.interface";
 
 /** Syncs marker likes to and from database. */
 export class LikeManager {
@@ -8,11 +10,11 @@ export class LikeManager {
   private markerTitle: string;
   private frame: HTMLElement;
   private isLiked: boolean;
-  private markerPath: Observable<any>;
+  private markerPath: Observable<Place>;
   private markerLikesPath: AngularFireObject<any>;
 
   /**Gets marker info from info window frame and creates references to database objects. */
-  constructor(afDB: AngularFireDatabase, frame: HTMLElement) {
+  constructor(afDB: AngularFireDatabase, placeData: PlaceDataProvider, frame: HTMLElement) {
 
     this.frame = frame;
     this.markerTitle = this.frame.querySelector('#title').textContent;
@@ -20,14 +22,14 @@ export class LikeManager {
 
     this.setInitialCondition();
 
-    this.markerPath = afDB.object('/markerLikes/' + this.markerTitle).valueChanges();
-    this.markerPath.subscribe(data => {
-      frame.querySelector('#num-likes').textContent = data.likes;
+    this.markerPath = placeData.getLikes(this.markerTitle).valueChanges(); //afDB.object('/markerLikes/' + this.markerTitle).valueChanges();
+    this.markerPath.subscribe(likes => {
+      frame.querySelector('#num-likes').textContent = likes.toString();
     });
 
     this.frame.querySelector('#like-button').addEventListener('click', () => this.handleLike());
 
-    this.markerLikesPath = afDB.object('/markerLikes/' + this.markerTitle +'/likes');
+    this.markerLikesPath = placeData.getLikes(this.markerTitle);//afDB.object('/markerLikes/' + this.markerTitle +'/likes');
   }
 
   private setInitialCondition() {
