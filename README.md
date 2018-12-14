@@ -7,14 +7,22 @@ like or dislike these spots.
 
 # Installation
 1. Install WebStorm on your computer
+
       https://www.jetbrains.com/webstorm/
 2. Install Node, Cordova, and Ionic
+
       Node:
+      
         https://nodejs.org/en/
+        
       Cordova:
+      
         Android- https://cordova.apache.org/docs/en/latest/guide/platforms/android/index.html
+        
         iOS- https://cordova.apache.org/docs/en/latest/guide/platforms/ios/index.html
+       
       Ionic:
+      
         https://ionicframework.com/docs/v1/guide/installation.html
         
 3. Download Xcode from the App Store
