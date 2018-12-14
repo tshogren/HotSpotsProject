@@ -4,7 +4,7 @@ import {IonicApp, IonicModule, IonicErrorHandler, PopoverCmp} from 'ionic-angula
 import { MyApp } from './app.component';
 
 import { SuggestPage } from '../pages/suggest/suggest';
-import { ContactPage } from '../pages/contact/contact';
+import { InformationPage } from '../pages/information/information';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 
@@ -36,7 +36,7 @@ export const firebaseConfig = {
   declarations: [
     MyApp,
     SuggestPage,
-    ContactPage,
+    InformationPage,
     HomePage,
     TabsPage,
     PopoverComponent
@@ -53,7 +53,7 @@ export const firebaseConfig = {
   entryComponents: [
     MyApp,
     SuggestPage,
-    ContactPage,
+    InformationPage,
     HomePage,
     TabsPage,
     PopoverComponent

@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 
 import { SuggestPage } from '../suggest/suggest';
-import { ContactPage } from '../contact/contact';
+import { InformationPage } from '../information/information';
 import { HomePage } from '../home/home';
 
 import {Events, Tabs} from "ionic-angular";
@@ -17,7 +17,7 @@ export class TabsPage {
   tab1Root = HomePage;
   tab2Root = SuggestPage;
   tab3Root = 'CommunityPage';
-  tab4Root = ContactPage;
+  tab4Root = InformationPage;
 
   constructor(private elementRef: ElementRef, private renderer: Renderer2, private event: Events ) {
 
