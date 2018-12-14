@@ -1,7 +1,11 @@
 import {CameraPosition, GoogleMap, ILatLng, LatLng, LatLngBounds, VisibleRegion} from "@ionic-native/google-maps";
 import { ToastController } from "ionic-angular";
+import {Toast} from "@ionic-native/toast";
 
 export class BoundsChecker {
+
+  /** Limits panning. Modified (very) thoroughly from https://stackoverflow.com/questions/3125065/how-do-i-limit-panning-in-google-maps-api-v3
+   for use with Android and iOS Maps SDK. */
 
   private map: GoogleMap;
   private defaultCenter: LatLng;
@@ -32,7 +36,7 @@ export class BoundsChecker {
 
   private currentCenter: ILatLng;
 
-  constructor(map: GoogleMap, defaultCenter: LatLng, public toaster: ToastController) {
+  constructor(map: GoogleMap, defaultCenter: LatLng, public toaster: Toast) {
     this.map = map;
     this.defaultCenter = defaultCenter;
 
@@ -57,9 +61,6 @@ export class BoundsChecker {
     this.mapHeight = Math.abs(this.northeast.lat) - Math.abs(this.southeast.lat);
     this.mapWidth = Math.abs(Math.abs(this.northeast.lng) - Math.abs(this.northwest.lng));
 
-    // console.log('Map Width: ' + this.mapWidth);
-    // console.log(cornerBounds);
-
     let cornersInBounds: Array<string> = [];
     Object.keys(cornerBounds).forEach(corner => {  // for each corner, if corner is in bounds
       if(cornerBounds[corner]) {
@@ -67,7 +68,6 @@ export class BoundsChecker {
       }
     });
 
-    // console.log(cornersInBounds);
 
     if(cornersInBounds.length < 4) {
 
@@ -85,8 +85,6 @@ export class BoundsChecker {
       if (cornersInBounds.length === 2) {
         centerOfRedirect = this.redirectAlongBoundary(cornersInBounds);
       }
-      // console.log(this.currentCenter);
-      // console.log(centerOfRedirect);
 
       this.map.animateCamera({
         target: centerOfRedirect,
@@ -152,13 +150,20 @@ export class BoundsChecker {
 
   private presentToast() {
 
-    const butteredToast = this.toaster.create({
-      message: 'Where are you going?',
-      duration: 1000,
-      position: 'bottom'
-    });
+    // const butteredToast = this.toaster.create({
+    //   message: 'Where are you going?',
+    //   duration: 1000,
+    //   position: 'bottom'
+    // });
 
-    butteredToast.present();
+    this.toaster.showWithOptions({
+      message: 'Where are you going?',
+      duration: 2000,
+      position: 'bottom',
+      addPixelsY: -350,
+    }).subscribe(console.log);
+
+    // butteredToast.present();
   }
 
 

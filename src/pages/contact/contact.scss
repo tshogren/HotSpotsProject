@@ -1,12 +1,20 @@
-ion-content {
-  font-family: Helvetica;
+page-contact {
+
+  ion-content {
+    font-family: Helvetica;
+  }
+
+  img {
+    object-fit: contain;
+  }
 
   ion-list {
     ion-item {
-      ion-thumbnail img{
-        height:30px;
-        width:10px;
+      ion-thumbnail img {
+        height: 30px;
+        width: 10px;
       }
     }
   }
+
 }

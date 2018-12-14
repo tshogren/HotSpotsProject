@@ -90,6 +90,7 @@
         <variable name="APLI_KEY_FOR_ANDROID" value="AIzaSyCAxltFP_d3v3EKPvAb6EEyJkAa040OdCQ" />
     </plugin>
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.1.3" />
+    <plugin name="cordova-plugin-x-toast" spec="2.7.2" />
     <engine name="android" spec="7.1.1" />
     <engine name="ios" spec="4.5.5" />
 </widget>

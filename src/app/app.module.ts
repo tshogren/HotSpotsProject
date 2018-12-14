@@ -20,6 +20,8 @@ import {Keyboard} from "@ionic-native/keyboard";
 import { SuggestionManagerProvider } from '../providers/suggestion-manager/suggestion-manager';
 import { PlaceDataProvider } from '../providers/suggestion-data/suggestion-data';
 import {IonicStorageModule} from "@ionic/storage";
+import { UtilitiesProvider } from '../providers/utilities/utilities';
+import {Toast} from "@ionic-native/toast";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyANyAIWgkJ0sKXsnLSo-hi_NVeixfvAj4I",
@@ -62,9 +64,11 @@ export const firebaseConfig = {
     GoogleMaps,
     AngularFireDatabase,
     Keyboard,
+    Toast,
     SuggestionManagerProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    PlaceDataProvider
+    PlaceDataProvider,
+    UtilitiesProvider
   ]
 })
 export class AppModule {}

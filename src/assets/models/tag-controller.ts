@@ -12,7 +12,7 @@ export class TagController {
     this.target = tagElement;
     this.baseColor = getComputedStyle(tagElement, null).getPropertyValue('background-color');
     this.tagName = tagName;
-    this.lightenFactor = 1;
+    this.lightenFactor = .6;
     this.darkenFactor = .4
   }
 

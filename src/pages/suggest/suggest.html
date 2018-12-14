@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-buttons end>
-      <button id="help-button" ion-button icon-only>
+      <button id="help-button" ion-button icon-only (click)="presentInfo()">
         <ion-icon name="help-circle"></ion-icon>
       </button>
     </ion-buttons>
@@ -22,7 +22,7 @@
   <div #map style="height:55%"></div>
   <ion-item style="height: 15%" padding-right>
     <ion-label stacked>Title</ion-label>
-    <ion-input id="input-place-name" type="text" maxlength="25" placeholder="Enter Hotspot Name"></ion-input>
+    <ion-input id="input-place-name" [(ngModel)]="markerTitle" (input)="validate()" type="text" maxlength="25" placeholder="Enter Hotspot Name"></ion-input>
     <button id="checkmark" round class="hide" ion-button item-end>
       <ion-icon name="checkmark"></ion-icon>
     </button>

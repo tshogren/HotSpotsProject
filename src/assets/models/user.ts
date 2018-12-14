@@ -9,6 +9,7 @@ export namespace User {
   let downvotedPlaces: string[] = [];
   let addedPlaces: Place[] = [];
   let visitedPages: string[];
+  let lastTimeActive: string;
 
   let lastAddedPlace: Subject<Place> = new Subject<Place>();
   let lastAddedPlace$: Observable<Place> = lastAddedPlace.asObservable();
@@ -22,7 +23,8 @@ export namespace User {
     likedPlaces = userData.likedPlaces;
     downvotedPlaces = userData.downvotedPlaces;
     addedPlaces = userData.addedPlaces;
-    visitedPages = userData.visitedPages
+    visitedPages = userData.visitedPages;
+    lastTimeActive = userData.lastTimeActive;
   }
 
   export function addPlace(place: any) {
@@ -73,7 +75,8 @@ export namespace User {
       likedPlaces: likedPlaces,
       downvotedPlaces: downvotedPlaces,
       addedPlaces: addedPlaces,
-      visitedPages: visitedPages
+      visitedPages: visitedPages,
+      lastTimeActive: lastTimeActive
     };
 
     return userData;
@@ -99,6 +102,14 @@ export namespace User {
     return addedPlaces.some(place => {
       return place.name === placeName;
     })
+  }
+
+  export function setLastTimeActive(timestamp: string) {
+    lastTimeActive = timestamp;
+  }
+
+  export function getLastTimeActive() {
+    return lastTimeActive;
   }
 
   export function getAddedPlaces() {

@@ -7,13 +7,13 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Select Parameters </ion-title>
+    <ion-title text-center>Place Information </ion-title>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content>
-
+  <div id="content-form">
   <div class="row-container" style="height: 15%; width: 100%">
     <span class="step row-container" padding-horizontal>
       <span><b>2</b></span>
@@ -26,16 +26,16 @@
       <img src="assets/imgs/landmark.png">
     </button>
     <button ion-button data-type="Athletics">
-      <img src="assets/imgs/social.png">
+      <img src="assets/imgs/athletic.png">
     </button>
     <button ion-button data-type="Dining">
-      <img src="assets/imgs/pin-empty.png">
+      <img src="assets/imgs/food-ico.png">
     </button>
     <button ion-button data-type="Dorm">
-      <img src="assets/imgs/pin-empty.png">
+      <img src="assets/imgs/dorm.png">
     </button>
-    <button ion-button data-type="Place of Interest">
-      <img src="assets/imgs/pin-empty.png">
+    <button ion-button data-type="Other">
+      <img src="assets/imgs/other.png">
     </button>
 
   </div>
@@ -55,7 +55,7 @@
 
   <ion-item padding-right>
     <ion-label stacked> Description </ion-label>
-    <ion-textarea id="description-input" [(ngModel)]="description" (input)="validateSubmit()" placeholder="Up to 20 words"></ion-textarea>
+    <ion-textarea id="description-input" maxlength="300" [(ngModel)]="description" (input)="validateSubmit()" placeholder="About 50 words or less"></ion-textarea>
   </ion-item>
 
   <div id="buttons" class="row-container" style="height: 15%">
@@ -66,5 +66,5 @@
       Submit
     </button>
   </div>
-
+  </div>
 </ion-content>

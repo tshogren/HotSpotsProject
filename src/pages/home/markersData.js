@@ -245,7 +245,7 @@ export const markersDataArray = [
       lat: 44.938996         ,
       lng: -93.168381
     },
-    description: 'Students can paint this rock whenever they want. Generally it is painted to promote certain events going on around campus or in the community.',
+    description: 'Students can paint this rock whenever they want. Generally it is painted to promote certain events going on around campus or in the community-top.',
     icon: landmarkIcon,
     type: types.LANDMARK,
     tags: [tags.HISTORIC]

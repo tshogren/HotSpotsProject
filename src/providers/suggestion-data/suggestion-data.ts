@@ -30,13 +30,22 @@ export class PlaceDataProvider {
     return this.recentSuggestions.valueChanges().pipe(take(1));
   }
 
+  getAllSuggestions() {
+    return this.afDB.list('suggestions').valueChanges().pipe(take(1));
+  }
+
   getDefaultSuggestions() {
     return this.defaultSuggestions.valueChanges().pipe(take(1));
   }
 
-  getLikes(suggestionTitle: string): AngularFireObject<Suggestion> {
+  getLikes(suggestionTitle: string): AngularFireObject<Place> {
     return this.afDB.object('/suggestions/' + suggestionTitle + '/likes');
   }
+
+  getNewSuggestions(timestamp: string) {
+    return this.afDB.database.ref('suggestions').orderByChild('timestamp').startAt(timestamp);
+  }
+
 
 
 

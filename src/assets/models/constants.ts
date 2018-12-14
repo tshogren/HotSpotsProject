@@ -29,8 +29,8 @@ export namespace Icon {
     }
   };
 
-  export const POI = {
-    'url': 'www/assets/imgs/pin-empty.png',
+  export const DINING = {
+    'url': 'www/assets/imgs/food-ico.png',
     'size': {
       width: iconWidth,
       height: iconHeight
@@ -60,6 +60,14 @@ export namespace Icon {
       height: iconHeight
     }
   };
+
+  export const OTHER = {
+    'url': 'www/assets/imgs/other.png',
+    'size': {
+      width: iconWidth,
+      height: iconHeight
+    }
+  }
 
 }
 
