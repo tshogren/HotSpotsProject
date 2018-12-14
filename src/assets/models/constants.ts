@@ -1,14 +1,4 @@
-import * as _ from 'underscore'
-
-export enum Type {
-  PLACE_OF_INTEREST = "POI",
-  ACADEMIC = "Academic",
-  LANDMARK = "Landmark",
-  SOCIAL = "Social"
-
-}
-
-export const TypeValues = _.values(Type);
+export const types = [];
 
 export const enum State {
   UPVOTE = 1,

@@ -1,0 +1,7 @@
+<ion-content padding-horizontal>
+
+  <ion-refresher (ionRefresh)="refreshRecent($event)">
+    <ion-refresher-content pullingIcon="sync"></ion-refresher-content>
+  </ion-refresher>
+  <suggestion-card *ngFor="let suggestion of recentSuggestions | async | reverse" [suggestion]="suggestion"></suggestion-card>
+</ion-content>

@@ -1,14 +1,11 @@
 import {Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Refresher, RefresherContent } from 'ionic-angular';
 import {PlaceDataProvider} from "../../providers/suggestion-data/suggestion-data";
 import {Observable} from "rxjs-compat";
-import {Suggestion} from "../../assets/models/suggestion.interface";
+import {Place} from "../../assets/models/place.interface";
 
 /**
- * Generated class for the CommunityTopPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+ * Displays the 20 suggestions with the most likes.
  */
 
 @IonicPage()
@@ -18,7 +15,7 @@ import {Suggestion} from "../../assets/models/suggestion.interface";
 })
 export class CommunityTopPage {
 
-  private topSuggestions: Observable<Suggestion[]>;
+  private topSuggestions: Observable<Place[]>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public suggestionData: PlaceDataProvider) {
   }
@@ -28,10 +25,11 @@ export class CommunityTopPage {
   }
 
   ionViewWillEnter() {
-    // Subscribe to suggestion data list: remove suggestions with likes >= 50 and likes <= -10
     this.topSuggestions = this.suggestionData.getTopSuggestions();
   }
 
-  ionViewDidLeave() {
+  refreshTop(refresher: Refresher) {
+    this.topSuggestions = this.suggestionData.getTopSuggestions();
+    setTimeout(() => {refresher.complete()}, 750);
   }
 }

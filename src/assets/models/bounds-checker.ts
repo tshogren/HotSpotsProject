@@ -1,5 +1,4 @@
 import {CameraPosition, GoogleMap, ILatLng, LatLng, LatLngBounds, VisibleRegion} from "@ionic-native/google-maps";
-import { ToastController } from "ionic-angular";
 import {Toast} from "@ionic-native/toast";
 
 export class BoundsChecker {
@@ -150,20 +149,12 @@ export class BoundsChecker {
 
   private presentToast() {
 
-    // const butteredToast = this.toaster.create({
-    //   message: 'Where are you going?',
-    //   duration: 1000,
-    //   position: 'bottom'
-    // });
-
     this.toaster.showWithOptions({
       message: 'Where are you going?',
       duration: 2000,
       position: 'bottom',
       addPixelsY: -350,
     }).subscribe(console.log);
-
-    // butteredToast.present();
   }
 
 

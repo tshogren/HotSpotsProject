@@ -50,12 +50,12 @@ export class MyApp {
       this.rootPage = TabsPage
     }
     else {
-      const defaultSuggestions = await this.placeData.getDefaultSuggestions().toPromise();
-      console.log(defaultSuggestions);
+      const allSuggestions = await this.placeData.getAllSuggestions().toPromise();
+      console.log(allSuggestions);
       let newUser: UserData = {
         likedPlaces: [],
         downvotedPlaces: [],
-        addedPlaces: defaultSuggestions,
+        addedPlaces: allSuggestions,
         visitedPages: [],
         lastTimeActive: this.util.getTimestamp()
       };

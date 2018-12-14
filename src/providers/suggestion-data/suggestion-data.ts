@@ -14,12 +14,14 @@ export class PlaceDataProvider {
   private topSuggestions: AngularFireList<Place>;
   private recentSuggestions: AngularFireList<Place>;
   private defaultSuggestions: AngularFireList<Place>;
+  private allSuggestions: AngularFireList<Place>;
 
   constructor(private afDB: AngularFireDatabase) {
     console.log('Hello PlaceDataProvider Provider');
     this.topSuggestions = afDB.list('/suggestions', ref => ref.orderByChild('likes').limitToLast(20));
     this.recentSuggestions = afDB.list('/suggestions', ref => ref.orderByChild('timestamp').limitToLast(20));
     this.defaultSuggestions = afDB.list('defaultPlaces');
+    this.allSuggestions = afDB.list('/suggestions')
   }
 
   getTopSuggestions() {
@@ -31,7 +33,7 @@ export class PlaceDataProvider {
   }
 
   getAllSuggestions() {
-    return this.afDB.list('suggestions').valueChanges().pipe(take(1));
+    return this.allSuggestions.valueChanges().pipe(take(1));
   }
 
   getDefaultSuggestions() {
