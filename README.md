@@ -29,17 +29,24 @@ like or dislike these spots.
 4. Clone the repository
 5. Open WebStorm
 6. Checkout From Version Control->Git 
+
       Paste the link from the repository
+      
 7. For iOS only, download CocoaPods
+
       https://cocoapods.org/app
       
-      In the WebStorm terminal: 
+      In the WebStorm terminal:
+      
         $ sudo gem install cocoapods
+        
         $ cd platforms/ios
+        
         $ pod install
          
 8. Currently, in Xcode, you have to use Legacy Build Systems.
       file->Workspace Settings
+      
           Under shared workspace settings, change the build system to Legacy Build Systems
           
 9. To run the app on a apple device from a Mac, plug your device into your computer. Open the HotSpots project in XCode,
