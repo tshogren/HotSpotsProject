@@ -36,7 +36,7 @@ export namespace Icon {
   };
 
   export const LANDMARK = {
-    'url': 'www/assets/imgs/food.png',
+    'url': 'www/assets/imgs/landmark.png',
     'size': {
       width: iconWidth,
       height: iconHeight,

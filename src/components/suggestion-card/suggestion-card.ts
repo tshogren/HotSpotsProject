@@ -47,7 +47,6 @@ export class SuggestionCardComponent implements OnInit {
   constructor(public renderer: Renderer2, private suggestionData: PlaceDataProvider, private toaster: ToastController) {
     console.log('Hello SuggestionCardComponent Component');
 
-    // this.currentState = this.initializeState();
     this.upvoteColor = "neutral";
     this.downvoteColor = "neutral";
     this.toggleAdd_throttled = _.throttle(button => this.toggleAddOrRemove(button), 1000, {trailing: false});

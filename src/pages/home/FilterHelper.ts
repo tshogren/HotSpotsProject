@@ -1,5 +1,7 @@
 export class FilterHelper {
 
+  /** Tracks whether types or tags in the filter component are selected. */
+
   types = ["Academic", "Dining", "Dorm", "Library", "Athletics", "Landmark", "Other"];
   tags = ["Art", "Athletic", "Food", "Historic", "Loud", "Nap", "Other", "Social", "Study"];
   data = {};
@@ -37,5 +39,3 @@ export class FilterHelper {
   }
 }
 
-// let filter = new FilterHelper();
-// console.log(filter.data);

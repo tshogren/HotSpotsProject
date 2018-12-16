@@ -15,7 +15,7 @@ import {UtilitiesProvider} from "../providers/utilities/utilities";
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage: any; //= 'Intro'; //set to TabsPage if not displaying everytime
+  rootPage: any;
   loader: any;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,

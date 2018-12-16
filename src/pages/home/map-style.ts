@@ -123,7 +123,7 @@ const style = [
 ];
 
 export const androidMap: GoogleMapOptions = {
-  mapType: GoogleMapsMapTypeId.HYBRID,
+  mapType: GoogleMapsMapTypeId.SATELLITE,
   gestures:{
     rotate: false
   },

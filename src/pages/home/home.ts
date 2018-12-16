@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild} from '@angular/core';
-import { NavController, Platform, Events, ToastController } from 'ionic-angular';
+import { Platform, Events } from 'ionic-angular';
 import {
   GoogleMap,
   GoogleMaps,
@@ -9,7 +9,6 @@ import {
   HtmlInfoWindow,
   Marker, ILatLng, GoogleMapsAnimation
 } from "@ionic-native/google-maps";
-import * as _ from 'underscore';
 
 import { mapStyle } from './mapStyle';
 import { androidMap, iOSMap} from "./map-style";
@@ -47,7 +46,6 @@ export class HomePage {
   private addedMarker$: Observable<Place>;
   private removedMarker$: Observable<string>;
 
-  // public navCtrl: NavController
   constructor(private platform: Platform,
               public popoverCtrl: PopoverController,
               public events: Events,
@@ -133,11 +131,8 @@ export class HomePage {
 
   addMarker(markerData, animation = null) {
 
-    // TODO: Give markers a tags paramater (String array) and destructure it here
     const {name, position, description, icon, type, tags} = markerData;
 
-    //Uncomment following line and run app to easily add/update our database references if/when we add markers (only for likes)
-    // this.afDB.list('/markerLikes').update(name, {likes: 0});
     console.log(icon);
     console.log(icon["url"]);
     if (this.platform.is("android")) this.util.resolveURL(icon);
@@ -151,10 +146,8 @@ export class HomePage {
       `<div id="tag-container"></div>`,
       `<p class="description">${description}</p>`,
       `<div class="row-container">`,
-        //`<div style="height: 30px; width: 70px; display: flex; align-items: center">`,
         `<button id="like-button"><span id="heart" class="like-button"></span></button>`,
         `<span id="num-likes" class="row-item num-likes"></span>`,
-        //`</div>`,
       `</div>`,
       `<button id="remove"><span id="cross"></span></button>`
     ].join('');
@@ -177,7 +170,6 @@ export class HomePage {
 
 
     htmlInfoWindow.setContent(frame, {width: '250px', maxHeight: '250px'});
-    // htmlInfoWindow.setBackgroundColor('');
 
     let markerOptions = {
       icon: icon,
@@ -245,10 +237,13 @@ export class HomePage {
           console.log('Something was unaccounted for. Marker: ' + marker.title);
         }
       }
-      let markerTag = marker.tags;
-      for(let index = 0; index < markerTag.length; index++)
-      if(filterData[markerTag[index]] === true){
-        marker.showMarker();
+      if (marker.tags) {
+        marker.tags.forEach(tag => {
+
+          if (filterData[tag.substring(0, 1).toUpperCase() + tag.substring(1)] === true) { // tags are listed with first letter capitalized in FilterHelper
+            marker.showMarker();
+          }
+        });
       }
     });
 
@@ -284,7 +279,7 @@ export class HomePage {
   }
 
   removeMarker(name: string) {
-    // let ind = this.markers.findIndex(marker => {return marker.title === name});
+
     let badMarker = this.markers.find(marker => {return marker.title === name});
     console.log(badMarker);
     if(badMarker) {
@@ -295,12 +290,5 @@ export class HomePage {
       setTimeout(() => this.removeMarker(name), 1000)
     }
   }
-
-  // resolveURL(icon) {
-  //   if(icon["url"]) {
-  //     icon.url = icon.url.replace("www/", "");
-  //   }
-
-  // }
 
 }
