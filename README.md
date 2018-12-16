@@ -49,5 +49,6 @@ To run the app on a apple device from a Mac, plug your device into your computer
 ### Android
 
 From the terminal, run either
+    ``` 
     $ ionic cordova emulate android
     $ ionic cordova run android
